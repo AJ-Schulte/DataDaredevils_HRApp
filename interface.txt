@@ -1,0 +1,47 @@
+public abstract Person
+{
+    public void Validate()
+    {
+
+    }
+    public void LogIn()
+    {
+
+    }
+    public void LogOut()
+    {
+
+    }
+}
+
+public class Manager extends Person
+{
+    public void CreateEmployee(String var)
+    {
+
+    }
+    public void RemoveEmployee(String employee)
+    {
+
+    }
+    public void ManageProject()
+    {
+
+    }
+}
+
+public class User extends Person
+{
+    public void EditDemographics()
+    {
+
+    }
+    public void ApplyForTeam()
+    {
+
+    }
+    public void ProgressReport()
+    {
+        
+    }
+}
