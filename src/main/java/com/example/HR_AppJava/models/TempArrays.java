@@ -24,17 +24,21 @@ public class TempArrays {
 
     // EmployeeDemographics array (Ethan)
     static ArrayList<Object> employeeDemographicsArray = new ArrayList<>();
+
     public void addDemographic(Object e) {
         employeeDemographicsArray.add(e);
     }
+
     public void removeDemographic(Object e) {
         employeeDemographicsArray.remove(e);
     }
-    public Object getDemographic(int i){
+
+    public Object getDemographic(int i) {
         return employeeDemographicsArray.get(i);
     }
-    public void setDemographic(int i, Object e){
-        employeeDemographicsArray.set(i,e);
+
+    public void setDemographic(int i, Object e) {
+        employeeDemographicsArray.set(i, e);
     }
 
     // EmployeeJobHistory (AJ)
@@ -55,5 +59,24 @@ public class TempArrays {
     public Object getFromJobHistory(int index) {
         return jobHistory.get(index);
     }
+
     // EmployeeEvaluation (Noah)
+    private ArrayList<Object> employeeEvaluation = new ArrayList<>();
+
+    public void addToEmployeeEvaluation(EmployeeEvaluation hires) {
+        employeeEvaluation.add(hires);
+    }
+
+    public void addToEmployeeEvaluationAt(int index, EmployeeEvaluation hires) {
+
+        employeeEvaluation.add(index, hires);
+    }
+
+    public void removeFromEmployeeEvaluation(EmployeeEvaluation fired) {
+        employeeEvaluation.remove(fired);
+    }
+
+    public Object getEmployeeEvaluation(int index) {
+        return employeeEvaluation.get(index);
+    }
 }
