@@ -23,22 +23,39 @@ public class TempArrays {
     }
 
     // EmployeeDemographics array (Ethan)
-    static ArrayList<Object> employeeDemographicsArray = new ArrayList<>();
+    static ArrayList<EmployeeDemographics> employeeDemographicsArray = new ArrayList<>();
 
-    public void addDemographic(Object e) {
+    public static void addDemographic(EmployeeDemographics e) {
         employeeDemographicsArray.add(e);
     }
 
-    public void removeDemographic(Object e) {
+    public static void removeDemographic(EmployeeDemographics e) {
         employeeDemographicsArray.remove(e);
     }
 
-    public Object getDemographic(int i) {
+    public static EmployeeDemographics getDemographic(int i) {
         return employeeDemographicsArray.get(i);
     }
 
-    public void setDemographic(int i, Object e) {
+    public static void setDemographic(int i, EmployeeDemographics e) {
         employeeDemographicsArray.set(i, e);
+    }
+
+    public static EmployeeDemographics searchDemographic(int memberID) throws Exception{
+        EmployeeDemographics output = null; //output is initialized to null to prevent polluting the database with a dummy object
+
+        for(int i=0; i<employeeDemographicsArray.size(); i++){
+            if(employeeDemographicsArray.get(i).getMemberID() == memberID){
+                output=employeeDemographicsArray.get(i); //output points to a specific index if it's found
+            }
+        }
+
+        if(output!=null) {
+            return output; //if output was changed, it's pointing to the matching true object and we can return it normally
+        }
+        else {
+            throw new Exception("Employee could not be found."); //otherwise we don't have an object to return and it throws an exception instead
+        }
     }
 
     // EmployeeJobHistory (AJ)
