@@ -13,21 +13,19 @@ public class User {
 
     private String username;
     private String email;
-    private Integer age;
-    private String city;
+    private String password;
+    private String company;
+    private boolean isSupervisor;
 
     // Constructors, getters, and setters
 
-    // Default constructor (needed by JPA)
-    public User() {
-    }
-
     // Constructor without id (for creating instances)
-    public User(String username, String email, Integer age, String city) {
+    public User(String username, String email, String password, String company, boolean isSupervisor) {
         this.username = username;
         this.email = email;
-        this.age = age;
-        this.city = city;
+        this.password = password;
+        this.company = company;
+        this.isSupervisor = isSupervisor;
     }
 
     // Getters and setters for all fields
@@ -56,19 +54,27 @@ public class User {
         this.email = email;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getCity() {
-        return city;
+    public String getCompany() {
+        return company;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public boolean getIsSupervisor() {
+        return isSupervisor;
+    }
+
+    public void setIsSupervisor(boolean isSupervisor) {
+        this.isSupervisor = isSupervisor;
     }
 }
