@@ -23,7 +23,7 @@ public class TempArrays {
     }
 
     // EmployeeDemographics array (Ethan)
-    static ArrayList<EmployeeDemographics> employeeDemographicsArray = new ArrayList<>();
+    private static ArrayList<EmployeeDemographics> employeeDemographicsArray = new ArrayList<>();
 
     public static void addDemographic(EmployeeDemographics e) {
         employeeDemographicsArray.add(e);
