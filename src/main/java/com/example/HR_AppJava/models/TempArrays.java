@@ -22,6 +22,14 @@ public class TempArrays {
         return userArray.get(index);
     }
 
+    public static boolean doesUserExist(String username, char[] password) {
+        for (User user : userArray) {
+            if (user.getUsername().equals(username))
+                return true;
+        }
+        return false;
+    }
+
     // EmployeeDemographics array (Ethan)
     private static ArrayList<EmployeeDemographics> employeeDemographicsArray = new ArrayList<>();
 
@@ -61,9 +69,9 @@ public class TempArrays {
     }
 
     // EmployeeJobHistory (AJ)
-    private ArrayList<Object> jobHistory = new ArrayList<>();
+    private static ArrayList<EmployeeJobHistory> jobHistory = new ArrayList<>();
 
-    public void addToJobHistory(EmployeeJobHistory job) {
+    public static void addToJobHistory(EmployeeJobHistory job) {
         jobHistory.add(job);
     }
 
@@ -80,7 +88,7 @@ public class TempArrays {
     }
 
     // EmployeeEvaluation (Noah)
-    private static ArrayList<Object> employeeEvaluation = new ArrayList<>();
+    private static ArrayList<EmployeeEvaluation> employeeEvaluation = new ArrayList<>();
 
     public static void addToEmployeeEvaluation(EmployeeEvaluation hires) {
         employeeEvaluation.add(hires);
