@@ -56,6 +56,7 @@ public class TempArrays {
         for (int i = 0; i < employeeDemographicsArray.size(); i++) {
             if (employeeDemographicsArray.get(i).getMemberID() == memberID) {
                 output = employeeDemographicsArray.get(i); // output points to a specific index if it's found
+                break; //faster
             }
         }
 
@@ -66,7 +67,7 @@ public class TempArrays {
             throw new Exception("Employee could not be found."); // otherwise we don't have an object to return and it
                                                                  // throws an exception instead
         }
-    }
+    } //This architecture should work for any field of EmployeeDemographics, but it can't detect duplicates.
 
     // EmployeeJobHistory (AJ)
     private static ArrayList<EmployeeJobHistory> jobHistory = new ArrayList<>();
