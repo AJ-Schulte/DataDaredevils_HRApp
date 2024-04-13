@@ -9,6 +9,7 @@ public class LoginPage extends JFrame {
     private JButton loginButton, signUpButton;
     private JTextField usernameTXT;
     private JPasswordField passwordTXT;
+    private static User currentUser;
 
     public LoginPage() {
         setTitle("HR App");
@@ -59,6 +60,7 @@ public class LoginPage extends JFrame {
     private void login(String username, char[] password) {
         if (TempArrays.doesUserExist(username, password)) {
             // Successfully logged in move to home page
+            currentUser = TempArrays.getUser(TempArrays.searchForUser(username, password));
             JOptionPane.showMessageDialog(this, "Successfully Logged In");
             dispose();
             new HomePage();
@@ -68,6 +70,9 @@ public class LoginPage extends JFrame {
             passwordTXT.setText("");
             usernameTXT.setText("");
         }
+    }
 
+    public static User getCurrentUser() {
+        return currentUser;
     }
 }

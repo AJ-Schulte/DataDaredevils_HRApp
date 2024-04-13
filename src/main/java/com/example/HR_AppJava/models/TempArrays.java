@@ -18,16 +18,25 @@ public class TempArrays {
         userArray.remove(user);
     }
 
-    public static Object getUser(int index) {
+    public static User getUser(int index) {
         return userArray.get(index);
     }
 
     public static boolean doesUserExist(String username, char[] password) {
         for (User user : userArray) {
-            if (user.getUsername().equals(username))
+            if (user.getUsername().equals(username) && user.getPassword().equals(String.valueOf(password)))
                 return true;
         }
         return false;
+    }
+
+    public static int searchForUser(String username, char[] password) {
+        for (int i = 0; i < userArray.size(); i++) {
+            if (userArray.get(i).getUsername().equals(username)
+                    && userArray.get(i).getPassword().equals(String.valueOf(password)))
+                return i;
+        }
+        return -1;
     }
 
     // EmployeeDemographics array (Ethan)
@@ -49,6 +58,10 @@ public class TempArrays {
         employeeDemographicsArray.set(i, e);
     }
 
+    public static int getDemographicSize() {
+        return employeeDemographicsArray.size();
+    }
+
     public static EmployeeDemographics searchDemographic(int memberID) throws Exception {
         EmployeeDemographics output = null; // output is initialized to null to prevent polluting the database with a
                                             // dummy object
@@ -56,7 +69,7 @@ public class TempArrays {
         for (int i = 0; i < employeeDemographicsArray.size(); i++) {
             if (employeeDemographicsArray.get(i).getMemberID() == memberID) {
                 output = employeeDemographicsArray.get(i); // output points to a specific index if it's found
-                break; //faster
+                break; // faster
             }
         }
 
@@ -67,7 +80,8 @@ public class TempArrays {
             throw new Exception("Employee could not be found."); // otherwise we don't have an object to return and it
                                                                  // throws an exception instead
         }
-    } //This architecture should work for any field of EmployeeDemographics, but it can't detect duplicates.
+    } // This architecture should work for any field of EmployeeDemographics, but it
+      // can't detect duplicates.
 
     // EmployeeJobHistory (AJ)
     private static ArrayList<EmployeeJobHistory> jobHistory = new ArrayList<>();

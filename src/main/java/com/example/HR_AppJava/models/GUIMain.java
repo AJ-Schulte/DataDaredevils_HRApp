@@ -2,8 +2,6 @@ package com.example.HR_AppJava.models;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GUIMain extends JFrame {
     // private JButton homeButton, userButton, createButton, saveButton,
@@ -17,9 +15,9 @@ public class GUIMain extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                User u1 = new User();
-                u1.setUsername("asa");
+                User u1 = new User("asa", null, "123", null, false);
                 TempArrays.addUser(u1);
+                Testing.arrayGen(1);
                 new LoginPage();
             }
         });

@@ -4,78 +4,92 @@
  * If you need a dummy instance, try initializing to null before rewriting this. (see implementation in TempArrays)
 */
 package com.example.HR_AppJava.models;
+
 public class EmployeeDemographics {
-    //Fields
+    // Fields
     private String name;
     private String address;
     private String phoneNumber;
     private String email;
     private int memberID;
     private String currentTeam;
-    private static int memberIDPosition=0;
+    private static int memberIDPosition = 0;
 
-    //Constructors
-    public EmployeeDemographics(String name, String address, String phoneNumber, String email, String currentTeam){
-        this.name=name;
-        this.address=address;
-        this.phoneNumber=phoneNumber;
-        this.email=email;
-        memberID=memberIDPosition; //autoassigns an ID; since memberIDPosition is static, new instanciations won't override it
+    // Constructors
+    public EmployeeDemographics(String name, String address, String phoneNumber, String email, String currentTeam) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        memberID = memberIDPosition; // autoassigns an ID; since memberIDPosition is static, new instanciations won't
+                                     // override it
         memberIDPosition++;
-        this.currentTeam=currentTeam;
-        save(); //The autosave is convienent but I can see how it might cause problems. Remove it if needed.
+        this.currentTeam = currentTeam;
+        save(); // The autosave is convienent but I can see how it might cause problems. Remove
+                // it if needed.
     }
 
-    //Getters
-    public String getName(){
+    // Getters
+    public String getName() {
         return name;
     }
+
     public String getAddress() {
         return address;
     }
-    public String getPhoneNumber(){
+
+    public String getPhoneNumber() {
         return phoneNumber;
     }
+
     public String getEmail() {
         return email;
     }
+
     public int getMemberID() {
         return memberID;
     }
+
     public String getCurrentTeam() {
         return currentTeam;
     }
 
-    //Setters
-    public void setName(String name){
-        this.name=name;
+    // Setters
+    public void setName(String name) {
+        this.name = name;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
-    public void setPhoneNumber(String phoneNumber){
-        this.phoneNumber=phoneNumber;
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
-    public void setEmail(String email){
-        this.email=email;
+
+    public void setEmail(String email) {
+        this.email = email;
     }
-    public void setMemberID(int memberID){
-        this.memberID=memberID;
+
+    public void setMemberID(int memberID) {
+        this.memberID = memberID;
     }
+
     public void setCurrentTeam(String currentTeam) {
         this.currentTeam = currentTeam;
     }
 
-    //Database Interactions
-    public void save(){ //write to database
+    // Database Interactions
+    public void save() { // write to database
         TempArrays.addDemographic(this);
     }
-    public void delete(){ //remove from database
+
+    public void delete() { // remove from database
         TempArrays.removeDemographic(this);
     }
 
-    //Other
-    public String toString() { //mainly for testing
-        return name+", "+address+", "+phoneNumber+", "+email+", "+memberID+", "+currentTeam;
+    // Other
+    public String toString() { // mainly for testing
+        return name + ", " + address + ", " + phoneNumber + ", " + email + ", " + memberID + ", " + currentTeam;
     }
 }
