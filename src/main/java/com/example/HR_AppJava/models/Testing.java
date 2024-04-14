@@ -123,10 +123,18 @@ public class Testing {
             }
             //What follows is the base-26 wizardry to make the chars increment correctly.
             p5 = lookup(i % 26);
-            if(i%26 == 0)     p4 = lookup(i/26 % 26); // /26 for how many TIMES it's wrapped, +1 because lookup starts at 1, %26 to force the answer to be 1-26.
-            if(i%676 == 0)    p3 = lookup(i/676 % 26); // Then the divisor has to be multipled by 26 for each position up.
-            if(i%17576 == 0)  p2 = lookup(i/17576 % 26);
-            if(i%456976 == 0) p1 = lookup(i/456976 % 26);
+            if(i%26 == 0) {
+                p4 = lookup(i/26 % 26); // /26 for how many TIMES it's wrapped, +1 because lookup starts at 1, %26 to force the answer to be 1-26.
+            }
+            if(i%676 == 0) {
+                p3 = lookup(i/676 % 26); // Then the divisor has to be multipled by 26 for each position up.
+            }
+            if(i%17576 == 0) {
+                p2 = lookup(i/17576 % 26);
+            }
+            if(i%456976 == 0) {
+                p1 = lookup(i/456976 % 26);
+            }
         }
         long t2 = System.currentTimeMillis();
         System.out.println("Array generation time: " + (t2-t1) + "ms");
