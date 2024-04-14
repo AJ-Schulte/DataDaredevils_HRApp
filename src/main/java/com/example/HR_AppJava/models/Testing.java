@@ -139,6 +139,7 @@ public class Testing {
         long t2 = System.currentTimeMillis();
         System.out.println("Array generation time: " + (t2-t1) + "ms");
     }
+
     public static void main(String[] args) throws Exception {
         //EmployeeDemographics tests
         arrayGen(1);
