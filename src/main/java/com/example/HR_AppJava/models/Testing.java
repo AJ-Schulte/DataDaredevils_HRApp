@@ -107,12 +107,6 @@ public class Testing {
         char p3 = 'a';
         char p4 = 'a';
         char p5 = 'a';
-        long t1 = System.currentTimeMillis();
-        char p1 = 'a';
-        char p2 = 'a';
-        char p3 = 'a';
-        char p4 = 'a';
-        char p5 = 'a';
         String fullString;
         for (int i = 1; i < 1000000; i++) {
             fullString = "" + p1 + p2 + p3 + p4 + p5;
