@@ -25,8 +25,9 @@ public class EmployeeDemographics {
                                      // override it
         memberIDPosition++;
         this.currentTeam = currentTeam;
-        save(); // The autosave is convienent but I can see how it might cause problems. Remove
-                // it if needed.
+        // save(); // The autosave is convienent but I can see how it might cause
+        // problems. Remove
+        // it if needed.
     }
 
     // Getters

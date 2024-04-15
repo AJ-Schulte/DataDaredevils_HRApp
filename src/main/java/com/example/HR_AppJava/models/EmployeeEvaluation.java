@@ -1,6 +1,5 @@
 package com.example.HR_AppJava.models;
 
-
 public class EmployeeEvaluation {
 
     private Integer dateOfEval;

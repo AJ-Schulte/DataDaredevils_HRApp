@@ -1,6 +1,8 @@
 package com.example.HR_AppJava.models;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,22 +22,45 @@ public class HomePage extends JFrame {
         addData = new JButton("Add");
         editData = new JButton("Edit");
 
-        String[] columnNames = { "Name", "E-Mail", "Phone Number", "Current Team" };
-        String[][] demographicsData = new String[TempArrays.getDemographicSize()][4];
+        String[] columnNames = { "ID", "Name", "E-Mail", "Phone Number", "Current Team" };
+        String[][] demographicsData = new String[TempArrays.getDemographicSize()][5];
         for (int i = 0; i < TempArrays.getDemographicSize(); i++) {
-            demographicsData[i][0] = TempArrays.getDemographic(i).getName();
-            demographicsData[i][1] = TempArrays.getDemographic(i).getEmail();
-            demographicsData[i][2] = TempArrays.getDemographic(i).getPhoneNumber();
-            demographicsData[i][3] = TempArrays.getDemographic(i).getCurrentTeam();
+            Integer memberID = TempArrays.getDemographic(i).getMemberID();
+            demographicsData[i][0] = memberID.toString();
+            demographicsData[i][1] = TempArrays.getDemographic(i).getName();
+            demographicsData[i][2] = TempArrays.getDemographic(i).getEmail();
+            demographicsData[i][3] = TempArrays.getDemographic(i).getPhoneNumber();
+            demographicsData[i][4] = TempArrays.getDemographic(i).getCurrentTeam();
         }
-        table = new JTable(demographicsData, columnNames);
-        table.setSelectionMode(1);
+        table = new JTable();
+        table.setSelectionMode(0);
+        DefaultTableModel tableModel = new DefaultTableModel(demographicsData, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        table.setModel(tableModel);
 
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
                 new UserPage();
+            }
+        });
+
+        addData.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (table.getSelectedRow() != -1) {
+                    int column = 0;
+                    int row = table.getSelectedRow();
+                    int value = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
+                    new EmployeePage(TempArrays.searchDemographic(value));
+                } else {
+                    unselected();
+                }
             }
         });
 
@@ -80,5 +105,9 @@ public class HomePage extends JFrame {
 
         this.pack();
         setVisible(true);
+    }
+
+    private void unselected() {
+        JOptionPane.showMessageDialog(this, "No Employee Selected. Try Again");
     }
 }

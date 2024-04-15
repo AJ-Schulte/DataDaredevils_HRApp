@@ -12,6 +12,7 @@ public class EmployeeJobHistory {
     private int softSkillsSize;
     private String[] talents;
     private int talentsSize;
+    private int employeeMemberID;
 
     // Constructors
     public EmployeeJobHistory() {
@@ -26,13 +27,14 @@ public class EmployeeJobHistory {
     }
 
     public EmployeeJobHistory(String nameOfFormerCompany, String previousSupervisor, int lengthOfPreviousJob,
-            String formerTitle, String role) {
+            String formerTitle, String role, int memberID) {
         this();
         companyName = nameOfFormerCompany;
         supervisor = previousSupervisor;
         lengthOnJob = lengthOfPreviousJob;
         jobTitle = formerTitle;
         roleOnTeam = role;
+        employeeMemberID = memberID;
     }
 
     // Getter methods
@@ -66,6 +68,10 @@ public class EmployeeJobHistory {
 
     public String[] getTalents() {
         return talents;
+    }
+
+    public int getEmployeeMemberID() {
+        return employeeMemberID;
     }
 
     // Setter methods

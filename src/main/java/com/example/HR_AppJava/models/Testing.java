@@ -118,7 +118,8 @@ public class Testing {
 
                 case 2:
                     TempArrays.addToJobHistory(
-                            new EmployeeJobHistory(fullString, fullString, rnd.nextInt(40), fullString, fullString));
+                            new EmployeeJobHistory(fullString, fullString, rnd.nextInt(40), fullString, fullString,
+                                    rnd.nextInt(40)));
                     break;
 
                 case 3:
