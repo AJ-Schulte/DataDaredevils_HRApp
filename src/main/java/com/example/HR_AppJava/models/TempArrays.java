@@ -111,7 +111,7 @@ public class TempArrays {
         jobHistory.remove(job);
     }
 
-    public static Object getFromJobHistory(int index) {
+    public static EmployeeJobHistory getFromJobHistory(int index) {
         return jobHistory.get(index);
     }
 
@@ -131,7 +131,7 @@ public class TempArrays {
         employeeEvaluation.remove(fired);
     }
 
-    public static Object getEmployeeEvaluation(int index) {
+    public static EmployeeEvaluation getEmployeeEvaluation(int index) {
         return employeeEvaluation.get(index);
     }
 }

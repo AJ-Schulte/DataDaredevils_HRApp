@@ -86,7 +86,7 @@ public class User {
         if(!manager.company.equals(employee.company)) return;
         String mentalState=""; //TODO: Input Mental state
         String employeeNotes=""; //TODO: Input Employee notes
-        EmployeeEvaluation review = new EmployeeEvaluation(manager.username, (LocalDate.now().getMonthValue()*100000 + LocalDate.now().getDayOfMonth()*1000 + LocalDate.now().getYear()), mentalState, employeeNotes);
+        EmployeeEvaluation review = new EmployeeEvaluation(manager.username, (LocalDate.now().getMonthValue()*1000000 + LocalDate.now().getDayOfMonth()*10000 + LocalDate.now().getYear()), mentalState, employeeNotes);
         TempArrays.addToEmployeeEvaluation(review);
     }
 }
