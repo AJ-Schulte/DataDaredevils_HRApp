@@ -22,6 +22,10 @@ public class TempArrays {
         return userArray.get(index);
     }
 
+    public static void setUser(int index, User user) {
+        userArray.set(index, user);
+    }
+
     public static boolean doesUserExist(String username, char[] password) {
         for (User user : userArray) {
             if (user.getUsername().equals(username) && user.getPassword().equals(String.valueOf(password)))
@@ -34,6 +38,15 @@ public class TempArrays {
         for (int i = 0; i < userArray.size(); i++) {
             if (userArray.get(i).getUsername().equals(username)
                     && userArray.get(i).getPassword().equals(String.valueOf(password)))
+                return i;
+        }
+        return -1;
+    }
+
+    public static int searchForUser(User user) {
+        for (int i = 0; i < userArray.size(); i++) {
+            if (userArray.get(i).getUsername().equals(user.getUsername())
+                    && userArray.get(i).getPassword().equals(String.valueOf(user.getPassword())))
                 return i;
         }
         return -1;

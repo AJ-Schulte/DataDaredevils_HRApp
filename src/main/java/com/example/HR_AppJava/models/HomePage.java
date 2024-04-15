@@ -29,6 +29,7 @@ public class HomePage extends JFrame {
             demographicsData[i][3] = TempArrays.getDemographic(i).getCurrentTeam();
         }
         table = new JTable(demographicsData, columnNames);
+        table.setSelectionMode(1);
 
         userButton.addActionListener(new ActionListener() {
             @Override

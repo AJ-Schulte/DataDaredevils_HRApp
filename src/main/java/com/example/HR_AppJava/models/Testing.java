@@ -10,9 +10,9 @@ import java.util.Random;
 public class Testing {
     private static Random rnd = new Random();
 
-    // Converts an int 1-26 to a char.
+    // Converts an int 0-25 to a char.
     private static char lookup(int in) {
-        switch ((in)) {
+        switch (in + 1) {
             case 1:
                 return 'a';
 
@@ -129,40 +129,43 @@ public class Testing {
                     TempArrays.addToEmployeeEvaluation(
                             new EmployeeEvaluation(fullString, rnd.nextInt(12319999), fullString, fullString));
             }
-            // What follows is the base-26 wizardry to make the chars increment correctly. I
-            // tried my best to make it not cross-eye inducing.
-            p5 = lookup((i % 26) + 1);
-            if (i % 26 == 0)
-                p4 = lookup(((i / 26) + 1) % 26); // /26 for how many TIMES it's wrapped, +1 because lookup starts at 1,
-                                                  // %26 to force the answer to be 1-26.
-            if (i % 676 == 0)
-                p3 = lookup(((i / 676) + 1) % 26); // Then the divisor has to be multipled by 26 for each position up.
-            if (i % 17576 == 0)
-                p2 = lookup(((i / 17576) + 1) % 26);
-            if (i % 456976 == 0)
-                p1 = lookup(((i / 456976) + 1) % 26);
+            // What follows is the base-26 wizardry to make the chars increment correctly.
+            p5 = lookup(i % 26);
+            if (i % 26 == 0) {
+                p4 = lookup(i / 26 % 26); // /26 for how many TIMES it's wrapped, +1 because lookup starts at 1, %26 to
+                                          // force the answer to be 1-26.
+            }
+            if (i % 676 == 0) {
+                p3 = lookup(i / 676 % 26); // Then the divisor has to be multipled by 26 for each position up.
+            }
+            if (i % 17576 == 0) {
+                p2 = lookup(i / 17576 % 26);
+            }
+            if (i % 456976 == 0) {
+                p1 = lookup(i / 456976 % 26);
+            }
         }
         long t2 = System.currentTimeMillis();
         System.out.println("Array generation time: " + (t2 - t1) + "ms");
     }
     /*
      * public static void main(String[] args) throws Exception {
-     * // EmployeeDemographics tests
+     * //EmployeeDemographics tests
      * arrayGen(1);
      * long t1 = System.currentTimeMillis();
-     * System.out.println(TempArrays.searchDemographic(rnd.nextInt(1000000 -
-     * 2)).toString());
+     * System.out.println(TempArrays.searchDemographic(rnd.nextInt(1000000-2)).
+     * toString());
      * long t2 = System.currentTimeMillis();
-     * System.out.println("Demographics array search time: " + (t2 - t1) + "ms");
-     * System.out.println(TempArrays.searchDemographic(1000000 - 2).toString());
+     * System.out.println("Demographics array search time: " + (t2-t1) + "ms");
+     * System.out.println(TempArrays.searchDemographic(1000000-2).toString());
      * 
-     * // EmployeeJobHistory tests
+     * //EmployeeJobHistory tests
      * arrayGen(2);
      * 
-     * // User tests
+     * //User tests
      * arrayGen(3);
      * 
-     * // EmployeeEvaluation tests
+     * //EmployeeEvaluation tests
      * arrayGen(4);
      * }
      */

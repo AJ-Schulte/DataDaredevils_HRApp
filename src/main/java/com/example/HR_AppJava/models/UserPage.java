@@ -24,10 +24,10 @@ public class UserPage extends JFrame {
         JLabel emailLabel = new JLabel("E-Mail: ");
         JLabel companyLabel = new JLabel("Company Name: ");
         JLabel blankLabel = new JLabel("");
-        userNameText = new JTextField(LoginPage.getCurrentUser().getUsername());
-        passwordText = new JTextField(LoginPage.getCurrentUser().getPassword());
-        emailText = new JTextField(LoginPage.getCurrentUser().getEmail());
-        companyText = new JTextField(LoginPage.getCurrentUser().getCompany());
+        userNameText = new JTextField(TempArrays.getUser(LoginPage.getCurrentUser()).getUsername());
+        passwordText = new JTextField(TempArrays.getUser(LoginPage.getCurrentUser()).getPassword());
+        emailText = new JTextField(TempArrays.getUser(LoginPage.getCurrentUser()).getEmail());
+        companyText = new JTextField(TempArrays.getUser(LoginPage.getCurrentUser()).getCompany());
 
         userNameText.setEditable(false);
         passwordText.setEditable(false);
@@ -44,6 +44,7 @@ public class UserPage extends JFrame {
 
         editSaveButton.addActionListener(new ActionListener() {
             boolean isClicked = false;
+            User currentUser = TempArrays.getUser(LoginPage.getCurrentUser());
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,11 +54,11 @@ public class UserPage extends JFrame {
                     passwordText.setEditable(true);
                     emailText.setEditable(true);
                     companyText.setEditable(true);
-                    User currentUser = LoginPage.getCurrentUser();
                     currentUser.setUsername(userNameText.getText());
                     currentUser.setPassword(passwordText.getText());
                     currentUser.setEmail(emailText.getText());
                     currentUser.setCompany(companyText.getText());
+                    TempArrays.setUser(LoginPage.getCurrentUser(), currentUser);
                 } else {
                     editSaveButton.setText("Edit");
                     userNameText.setEditable(false);
@@ -66,6 +67,7 @@ public class UserPage extends JFrame {
                     companyText.setEditable(false);
                 }
                 isClicked = !isClicked;
+
             }
         });
 
@@ -107,6 +109,6 @@ public class UserPage extends JFrame {
 
         this.pack();
         setVisible(true);
-
     }
+
 }

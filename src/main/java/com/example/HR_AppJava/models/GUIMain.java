@@ -11,6 +11,14 @@ public class GUIMain extends JFrame {
     // lengthOnJobTXT, jobTitleTXT, roleTXT, criticalSkillsTXT, softSkillsTXT,
     // talentsTXT, evaluatingSupervisorTXT, dateOfEvalTXT, mentalStateTXT, notesTXT;
 
+    public GUIMain() {
+        setTitle("HR App");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setPreferredSize(new Dimension(1000, 600));
+
+        setVisible(true);
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
