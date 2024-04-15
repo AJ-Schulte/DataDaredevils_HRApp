@@ -50,14 +50,14 @@ public class HomePage extends JFrame {
             }
         });
 
-        addData.addActionListener(new ActionListener() {
+        editData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (table.getSelectedRow() != -1) {
                     int column = 0;
                     int row = table.getSelectedRow();
                     int value = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-                    new EmployeePage(TempArrays.searchDemographic(value));
+                    new EditEmployeePage(TempArrays.searchDemographic(value));
                 } else {
                     unselected();
                 }

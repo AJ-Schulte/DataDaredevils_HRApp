@@ -6,12 +6,9 @@ public class EmployeeJobHistory {
     private int lengthOnJob; // in months
     private String jobTitle;
     private String roleOnTeam;
-    private String[] criticalSkills;
-    private int criticalSkillsSize;
-    private String[] softSkills;
-    private int softSkillsSize;
-    private String[] talents;
-    private int talentsSize;
+    private String criticalSkills;
+    private String softSkills;
+    private String talents;
     private int employeeMemberID;
 
     // Constructors
@@ -21,9 +18,9 @@ public class EmployeeJobHistory {
         lengthOnJob = 0;
         jobTitle = "";
         roleOnTeam = "";
-        criticalSkills = new String[10];
-        softSkills = new String[10];
-        talents = new String[10];
+        criticalSkills = "";
+        softSkills = "";
+        talents = "";
     }
 
     public EmployeeJobHistory(String nameOfFormerCompany, String previousSupervisor, int lengthOfPreviousJob,
@@ -58,15 +55,15 @@ public class EmployeeJobHistory {
         return roleOnTeam;
     }
 
-    public String[] getCriticalSkills() {
+    public String getCriticalSkills() {
         return criticalSkills;
     }
 
-    public String[] getSoftSkills() {
+    public String getSoftSkills() {
         return softSkills;
     }
 
-    public String[] getTalents() {
+    public String getTalents() {
         return talents;
     }
 
@@ -75,25 +72,16 @@ public class EmployeeJobHistory {
     }
 
     // Setter methods
-    public void addToCriticalSkill(String criticalSkill) {
-        if (criticalSkillsSize == criticalSkills.length)
-            criticalSkills = EmployeeJobHistory.expandCapacity(criticalSkills);
-        criticalSkills[criticalSkillsSize] = criticalSkill;
-        criticalSkillsSize++;
+    public void setCriticalSkills(String criticalSkill) {
+        criticalSkills = criticalSkill;
     }
 
-    public void addToSoftSkills(String softSkill) {
-        if (softSkillsSize == softSkills.length)
-            softSkills = EmployeeJobHistory.expandCapacity(softSkills);
-        softSkills[softSkillsSize] = softSkill;
-        softSkillsSize++;
+    public void setSoftSkills(String softSkill) {
+        softSkills = softSkill;
     }
 
-    public void addToTalents(String talent) {
-        if (talentsSize == talents.length)
-            talents = EmployeeJobHistory.expandCapacity(talents);
-        talents[talentsSize] = talent;
-        talentsSize++;
+    public void setTalents(String talent) {
+        talents = talent;
     }
 
     public void setCompanyName(String nameOfCompany) {
@@ -116,17 +104,4 @@ public class EmployeeJobHistory {
         roleOnTeam = role;
     }
 
-    // expand capacity method to increase array sizes
-    private static String[] expandCapacity(String[] arr) {
-        // create new bigger array
-        String[] temp = new String[arr.length * 2];
-
-        // copy old values into new array
-        for (int i = 0; i < arr.length; i++)
-            temp[i] = arr[i];
-
-        // update property to point to new array
-        arr = temp;
-        return arr;
-    }
 }

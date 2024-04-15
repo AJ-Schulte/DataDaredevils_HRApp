@@ -116,6 +116,15 @@ public class TempArrays {
         return jobHistory.get(index);
     }
 
+    public static ArrayList<EmployeeJobHistory> getAllJobHistories(int memberID) {
+        ArrayList<EmployeeJobHistory> indexes = new ArrayList<>();
+        for (int i = 0; i < jobHistory.size(); i++) {
+            if (jobHistory.get(i).getEmployeeMemberID() == memberID)
+                indexes.add(jobHistory.get(i));
+        }
+        return indexes;
+    }
+
     // EmployeeEvaluation (Noah)
     private static ArrayList<EmployeeEvaluation> employeeEvaluation = new ArrayList<>();
 
