@@ -48,8 +48,7 @@ public class SignUpPage extends JFrame {
 
     private void signUp(String username, char[] password) {
         // creates new user with details provided and automatically moves to login page
-        User newUser = new User();
-        newUser.setUsername(username);
+        User newUser = new User(username, null, String.valueOf(password), null, false);
         TempArrays.addUser(newUser);
         JOptionPane.showMessageDialog(this, "Successfully Created a New Account");
         new LoginPage();
