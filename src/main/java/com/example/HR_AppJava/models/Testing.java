@@ -5,6 +5,8 @@
  */
 package com.example.HR_AppJava.models;
 
+import java.time.Instant;
+import java.util.Date;
 import java.util.Random;
 
 public class Testing {
@@ -119,7 +121,7 @@ public class Testing {
                 case 2:
                     TempArrays.addToJobHistory(
                             new EmployeeJobHistory(fullString, fullString, rnd.nextInt(40), fullString, fullString,
-                                    rnd.nextInt(40)));
+                                    i - 1));
                     break;
 
                 case 3:
@@ -128,7 +130,8 @@ public class Testing {
 
                 case 4:
                     TempArrays.addToEmployeeEvaluation(
-                            new EmployeeEvaluation(fullString, rnd.nextInt(12319999), fullString, fullString));
+                            new EmployeeEvaluation(fullString, Date.from(Instant.now()), fullString, fullString,
+                                    i - 1));
             }
             // What follows is the base-26 wizardry to make the chars increment correctly.
             p5 = lookup(i % 26);

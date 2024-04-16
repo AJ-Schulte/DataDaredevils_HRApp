@@ -26,6 +26,8 @@ public class GUIMain extends JFrame {
                 User u1 = new User("asa", null, "123", null, false);
                 TempArrays.addUser(u1);
                 Testing.arrayGen(1);
+                Testing.arrayGen(2);
+                Testing.arrayGen(4);
                 new LoginPage();
             }
         });

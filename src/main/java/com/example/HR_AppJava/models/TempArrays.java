@@ -112,7 +112,7 @@ public class TempArrays {
         jobHistory.remove(job);
     }
 
-    public static Object getFromJobHistory(int index) {
+    public static EmployeeJobHistory getFromJobHistory(int index) {
         return jobHistory.get(index);
     }
 
@@ -143,5 +143,14 @@ public class TempArrays {
 
     public static Object getEmployeeEvaluation(int index) {
         return employeeEvaluation.get(index);
+    }
+
+    public static ArrayList<EmployeeEvaluation> getAllEvaluations(int memberID) {
+        ArrayList<EmployeeEvaluation> indexes = new ArrayList<>();
+        for (int i = 0; i < employeeEvaluation.size(); i++) {
+            if (employeeEvaluation.get(i).getEmployeeMemberID() == memberID)
+                indexes.add(employeeEvaluation.get(i));
+        }
+        return indexes;
     }
 }

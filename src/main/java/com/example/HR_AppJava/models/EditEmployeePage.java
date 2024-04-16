@@ -5,9 +5,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class EditEmployeePage extends JFrame {
     private JPanel demographicsPanel, jobHistoryPanel, evaluationPanel;
+    private JButton saveButton;
     private JLabel demographicLabel, nameLabel, addressLabel, emailLabel, phoneNumLabel, currentTeamLabel,
             jobHistoryLabel, companyNameLabel, supervisorLabel, lengthLabel, jobTitleLabel, roleOnTeamLabel,
             critSkillsLabel, softSkillsLabel, talentsLabel, employeeEvalLabel, dateOfEvalLabel, mentalStateLabel,
@@ -22,9 +25,12 @@ public class EditEmployeePage extends JFrame {
     public EditEmployeePage(EmployeeDemographics employee) {
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setPreferredSize(new Dimension(1000, 600));
+        setPreferredSize(new Dimension(1200, 600));
 
         ArrayList<EmployeeJobHistory> jobHistories = TempArrays.getAllJobHistories(employee.getMemberID());
+        ArrayList<EmployeeEvaluation> evaluations = TempArrays.getAllEvaluations(employee.getMemberID());
+
+        saveButton = new JButton("Save");
 
         // Label Initializations
         demographicLabel = new JLabel("Employee Demographics: ");
@@ -54,13 +60,28 @@ public class EditEmployeePage extends JFrame {
         emailTextField = new JTextField(employee.getEmail());
         phoneNumTextField = new JTextField(employee.getPhoneNumber());
         currentTeamTextField = new JTextField(employee.getCurrentTeam());
+        companyNameTextField = new JTextField();
+        supervisorTextField = new JTextField();
+        jobTitleTextField = new JTextField();
+        roleOnTeamTextField = new JTextField();
         critSkillsArea = new JTextArea();
         softSkillsArea = new JTextArea();
         talentsArea = new JTextArea();
+        mentalStateTextField = new JTextField();
+        notesArea = new JTextArea();
+        evaluatingSupervisorTextField = new JTextField();
 
         // Spinner Set-Up
         SpinnerNumberModel numberModel = new SpinnerNumberModel(0, 0, 10000, 1);
         lengthSpinner = new JSpinner(numberModel);
+        Calendar calendar = Calendar.getInstance();
+        Date initDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, -100);
+        Date earliestDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, 200);
+        Date latestDate = calendar.getTime();
+        SpinnerDateModel dateModel = new SpinnerDateModel(initDate, earliestDate, latestDate, Calendar.YEAR);
+        dateOfEvalSpinner = new JSpinner(dateModel);
 
         // Job History Panel
         jobHistoryPanel = new JPanel();
@@ -68,34 +89,58 @@ public class EditEmployeePage extends JFrame {
         jobHistoryPanel.setPreferredSize(new Dimension(1000, 600));
         jobHistoryPanel.add(jobHistoryLabel);
         jobHistoryPanel.add(new JLabel());
-        for (EmployeeJobHistory jobHistory : jobHistories) {
+        for (int i = 0; i < jobHistories.size(); i++) {
             jobHistoryPanel.add(companyNameLabel);
-            companyNameTextField.setText(jobHistory.getCompanyName());
+            companyNameTextField.setText(jobHistories.get(i).getCompanyName());
             jobHistoryPanel.add(companyNameTextField);
             jobHistoryPanel.add(supervisorLabel);
-            supervisorTextField.setText(jobHistory.getSupervisor());
+            supervisorTextField.setText(jobHistories.get(i).getSupervisor());
             jobHistoryPanel.add(supervisorTextField);
             jobHistoryPanel.add(lengthLabel);
+            lengthSpinner.setValue(jobHistories.get(i).getLengthOnJob());
             jobHistoryPanel.add(lengthSpinner);
             jobHistoryPanel.add(jobTitleLabel);
-            jobTitleTextField.setText(jobHistory.getJobTitle());
+            jobTitleTextField.setText(jobHistories.get(i).getJobTitle());
             jobHistoryPanel.add(jobTitleTextField);
             jobHistoryPanel.add(roleOnTeamLabel);
-            roleOnTeamTextField.setText(jobHistory.getRoleOnTeam());
+            roleOnTeamTextField.setText(jobHistories.get(i).getRoleOnTeam());
             jobHistoryPanel.add(roleOnTeamTextField);
             jobHistoryPanel.add(critSkillsLabel);
-            critSkillsArea.setText(jobHistory.getCriticalSkills());
+            critSkillsArea.setText(jobHistories.get(i).getCriticalSkills());
             jobHistoryPanel.add(critSkillsArea);
             jobHistoryPanel.add(softSkillsLabel);
-            softSkillsArea.setText(jobHistory.getSoftSkills());
+            softSkillsArea.setText(jobHistories.get(i).getSoftSkills());
             jobHistoryPanel.add(softSkillsArea);
             jobHistoryPanel.add(talentsLabel);
-            talentsArea.setText(jobHistory.getTalents());
+            talentsArea.setText(jobHistories.get(i).getTalents());
             jobHistoryPanel.add(talentsArea);
         }
 
+        // Employee Evaluations
+        evaluationPanel = new JPanel();
+        evaluationPanel.setLayout(new GridLayout(6, 2));
+        evaluationPanel.setPreferredSize(new Dimension(1000, 600));
+        evaluationPanel.add(employeeEvalLabel);
+        evaluationPanel.add(new JLabel());
+        for (int i = 0; i < evaluations.size(); i++) {
+            evaluationPanel.add(dateOfEvalLabel);
+            dateOfEvalSpinner.setValue(evaluations.get(i).getDateofEval());
+            evaluationPanel.add(dateOfEvalSpinner);
+            evaluationPanel.add(mentalStateLabel);
+            mentalStateTextField.setText(evaluations.get(i).getMentalstate());
+            evaluationPanel.add(mentalStateTextField);
+            evaluationPanel.add(evaluatingSupervisorLabel);
+            evaluatingSupervisorTextField.setText(evaluations.get(i).getEvaluatingSupervisor());
+            evaluationPanel.add(evaluatingSupervisorTextField);
+            evaluationPanel.add(notesLabel);
+            notesArea.setText(evaluations.get(i).getEmployeenotes());
+            evaluationPanel.add(notesArea);
+        }
+        evaluationPanel.add(new JLabel());
+        evaluationPanel.add(saveButton);
+
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         JScrollPane jobHistoryScroller = new JScrollPane(mainPanel);
 
         // Demographics Panel
@@ -126,8 +171,14 @@ public class EditEmployeePage extends JFrame {
         gluePanel2.add(Box.createHorizontalGlue(), BorderLayout.CENTER);
         gluePanel2.add(Box.createVerticalGlue(), BorderLayout.SOUTH);
 
+        JPanel gluePanel3 = new JPanel(new BorderLayout());
+        gluePanel3.add(evaluationPanel, BorderLayout.WEST);
+        gluePanel3.add(Box.createHorizontalGlue(), BorderLayout.CENTER);
+        gluePanel3.add(Box.createVerticalGlue(), BorderLayout.SOUTH);
+
         mainPanel.add(gluePanel1);
         mainPanel.add(gluePanel2);
+        mainPanel.add(gluePanel3);
         this.getContentPane().add(jobHistoryScroller);
 
         this.pack();
