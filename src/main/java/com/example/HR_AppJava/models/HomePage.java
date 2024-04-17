@@ -50,6 +50,15 @@ public class HomePage extends JFrame {
             }
         });
 
+        addData.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EmployeeDemographics newEmployee = new EmployeeDemographics(null, null, null, null, null);
+                TempArrays.addDemographic(newEmployee);
+                new AddEmployeePage(newEmployee);
+            }
+        });
+
         editData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

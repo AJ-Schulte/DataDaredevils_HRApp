@@ -4,11 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class EditEmployeePage extends JFrame {
+public class AddEmployeePage extends JFrame {
     private JPanel demographicsPanel, jobHistoryPanel, evaluationPanel;
     private JButton saveButton, addHistoryButton, addEvaluationButton;
     private JLabel demographicLabel, nameLabel, addressLabel, emailLabel, phoneNumLabel, currentTeamLabel,
@@ -22,13 +21,10 @@ public class EditEmployeePage extends JFrame {
     private JTextArea critSkillsArea, softSkillsArea, talentsArea, notesArea;
     private JSpinner lengthSpinner, dateOfEvalSpinner;
 
-    public EditEmployeePage(EmployeeDemographics employee) {
+    public AddEmployeePage(EmployeeDemographics employee) {
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 600));
-
-        ArrayList<EmployeeJobHistory> jobHistories = TempArrays.getAllJobHistories(employee.getMemberID());
-        ArrayList<EmployeeEvaluation> evaluations = TempArrays.getAllEvaluations(employee.getMemberID());
 
         saveButton = new JButton("Save");
         addHistoryButton = new JButton("New Job History");
@@ -57,11 +53,11 @@ public class EditEmployeePage extends JFrame {
         evaluatingSupervisorLabel = new JLabel("Evaluating Supervisor: ");
 
         // Text Area Initializations
-        nameTextField = new JTextField(employee.getName());
-        addressTextField = new JTextField(employee.getAddress());
-        emailTextField = new JTextField(employee.getEmail());
-        phoneNumTextField = new JTextField(employee.getPhoneNumber());
-        currentTeamTextField = new JTextField(employee.getCurrentTeam());
+        nameTextField = new JTextField();
+        addressTextField = new JTextField();
+        emailTextField = new JTextField();
+        phoneNumTextField = new JTextField();
+        currentTeamTextField = new JTextField();
         companyNameTextField = new JTextField();
         supervisorTextField = new JTextField();
         jobTitleTextField = new JTextField();
@@ -73,7 +69,6 @@ public class EditEmployeePage extends JFrame {
         notesArea = new JTextArea();
         evaluatingSupervisorTextField = new JTextField();
 
-        // Spinner Set-Ups
         SpinnerNumberModel numberModel = new SpinnerNumberModel(0, 0, 10000, 1);
         lengthSpinner = new JSpinner(numberModel);
         Calendar calendar = Calendar.getInstance();
@@ -102,25 +97,14 @@ public class EditEmployeePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Create a Pop-up window that allows user to enter info for job history that
                 // needs to be added to database then dispose pop-up
+
+                // Creates a new Frame to be the base of the pop-up window
                 JFrame addHistoryFrame = new JFrame();
                 addHistoryFrame.setTitle("HR App");
                 addHistoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 addHistoryFrame.setPreferredSize(new Dimension(500, 600));
 
                 JButton addHistoryButton = new JButton("Create");
-
-                JTextField companyNameTextField2, supervisorTextField2, jobTitleTextField2, roleOnTeamTextField2;
-                companyNameTextField2 = new JTextField();
-                supervisorTextField2 = new JTextField();
-                jobTitleTextField2 = new JTextField();
-                roleOnTeamTextField2 = new JTextField();
-
-                JTextArea critSkillsArea2, softSkillsArea2, talentsArea2;
-                critSkillsArea2 = new JTextArea();
-                softSkillsArea2 = new JTextArea();
-                talentsArea2 = new JTextArea();
-
-                JSpinner lengthSpinner2 = new JSpinner(numberModel);
 
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
@@ -134,21 +118,21 @@ public class EditEmployeePage extends JFrame {
                 JPanel historyPanel = new JPanel();
                 historyPanel.setLayout(new GridLayout(9, 2));
                 historyPanel.add(companyNameLabel);
-                historyPanel.add(companyNameTextField2);
+                historyPanel.add(companyNameTextField);
                 historyPanel.add(supervisorLabel);
-                historyPanel.add(supervisorTextField2);
+                historyPanel.add(supervisorTextField);
                 historyPanel.add(lengthLabel);
-                historyPanel.add(lengthSpinner2);
+                historyPanel.add(lengthSpinner);
                 historyPanel.add(jobTitleLabel);
-                historyPanel.add(jobTitleTextField2);
+                historyPanel.add(jobTitleTextField);
                 historyPanel.add(roleOnTeamLabel);
-                historyPanel.add(roleOnTeamTextField2);
+                historyPanel.add(roleOnTeamTextField);
                 historyPanel.add(critSkillsLabel);
-                historyPanel.add(critSkillsArea2);
+                historyPanel.add(critSkillsArea);
                 historyPanel.add(softSkillsLabel);
-                historyPanel.add(softSkillsArea2);
+                historyPanel.add(softSkillsArea);
                 historyPanel.add(talentsLabel);
-                historyPanel.add(talentsArea2);
+                historyPanel.add(talentsArea);
                 historyPanel.add(new JLabel());
                 historyPanel.add(addHistoryButton);
 
@@ -169,28 +153,13 @@ public class EditEmployeePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Create a pop-up window that allows user to enter info for evaluation which
                 // needs to be added to database then dispose pop-up
+
                 JFrame evaluationFrame = new JFrame();
                 evaluationFrame.setTitle("HR App");
                 evaluationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 evaluationFrame.setPreferredSize(new Dimension(500, 600));
 
                 JButton evaluationButton = new JButton("Create");
-
-                JTextField mentalStateTextField2, evaluatingSupervisorTextField2;
-                mentalStateTextField2 = new JTextField();
-                evaluatingSupervisorTextField2 = new JTextField();
-
-                JTextArea notesArea2 = new JTextArea();
-
-                Calendar calendar2 = Calendar.getInstance();
-                Date initDate2 = calendar2.getTime();
-                calendar2.add(Calendar.YEAR, -100);
-                Date earliestDate2 = calendar2.getTime();
-                calendar2.add(Calendar.YEAR, 200);
-                Date latestDate2 = calendar2.getTime();
-                SpinnerDateModel dateModel2 = new SpinnerDateModel(initDate2, earliestDate2, latestDate2,
-                        Calendar.YEAR);
-                JSpinner dateOfEvalSpinner2 = new JSpinner(dateModel2);
 
                 evaluationButton.addActionListener(new ActionListener() {
                     @Override
@@ -204,13 +173,13 @@ public class EditEmployeePage extends JFrame {
                 JPanel evaluationsPanel = new JPanel();
                 evaluationsPanel.setLayout(new GridLayout(5, 2));
                 evaluationsPanel.add(dateOfEvalLabel);
-                evaluationsPanel.add(dateOfEvalSpinner2);
+                evaluationsPanel.add(dateOfEvalSpinner);
                 evaluationsPanel.add(mentalStateLabel);
-                evaluationsPanel.add(mentalStateTextField2);
+                evaluationsPanel.add(mentalStateTextField);
                 evaluationsPanel.add(evaluatingSupervisorLabel);
-                evaluationsPanel.add(evaluatingSupervisorTextField2);
+                evaluationsPanel.add(evaluatingSupervisorTextField);
                 evaluationsPanel.add(notesLabel);
-                evaluationsPanel.add(notesArea2);
+                evaluationsPanel.add(notesArea);
                 evaluationsPanel.add(new JLabel());
                 evaluationsPanel.add(evaluationButton);
 
@@ -237,55 +206,15 @@ public class EditEmployeePage extends JFrame {
         jobHistoryPanel.setPreferredSize(new Dimension(1000, 600));
         jobHistoryPanel.add(jobHistoryLabel);
         jobHistoryPanel.add(new JLabel());
-        for (int i = 0; i < jobHistories.size(); i++) {
-            jobHistoryPanel.add(companyNameLabel);
-            companyNameTextField.setText(jobHistories.get(i).getCompanyName());
-            jobHistoryPanel.add(companyNameTextField);
-            jobHistoryPanel.add(supervisorLabel);
-            supervisorTextField.setText(jobHistories.get(i).getSupervisor());
-            jobHistoryPanel.add(supervisorTextField);
-            jobHistoryPanel.add(lengthLabel);
-            lengthSpinner.setValue(jobHistories.get(i).getLengthOnJob());
-            jobHistoryPanel.add(lengthSpinner);
-            jobHistoryPanel.add(jobTitleLabel);
-            jobTitleTextField.setText(jobHistories.get(i).getJobTitle());
-            jobHistoryPanel.add(jobTitleTextField);
-            jobHistoryPanel.add(roleOnTeamLabel);
-            roleOnTeamTextField.setText(jobHistories.get(i).getRoleOnTeam());
-            jobHistoryPanel.add(roleOnTeamTextField);
-            jobHistoryPanel.add(critSkillsLabel);
-            critSkillsArea.setText(jobHistories.get(i).getCriticalSkills());
-            jobHistoryPanel.add(critSkillsArea);
-            jobHistoryPanel.add(softSkillsLabel);
-            softSkillsArea.setText(jobHistories.get(i).getSoftSkills());
-            jobHistoryPanel.add(softSkillsArea);
-            jobHistoryPanel.add(talentsLabel);
-            talentsArea.setText(jobHistories.get(i).getTalents());
-            jobHistoryPanel.add(talentsArea);
-        }
         jobHistoryPanel.add(new JLabel());
         jobHistoryPanel.add(addHistoryButton);
 
-        // Employee Evaluations
+        // Evaluation Panel
         evaluationPanel = new JPanel();
         evaluationPanel.setLayout(new GridLayout(7, 2));
         evaluationPanel.setPreferredSize(new Dimension(1000, 600));
         evaluationPanel.add(employeeEvalLabel);
         evaluationPanel.add(new JLabel());
-        for (int i = 0; i < evaluations.size(); i++) {
-            evaluationPanel.add(dateOfEvalLabel);
-            dateOfEvalSpinner.setValue(evaluations.get(i).getDateofEval());
-            evaluationPanel.add(dateOfEvalSpinner);
-            evaluationPanel.add(mentalStateLabel);
-            mentalStateTextField.setText(evaluations.get(i).getMentalstate());
-            evaluationPanel.add(mentalStateTextField);
-            evaluationPanel.add(evaluatingSupervisorLabel);
-            evaluatingSupervisorTextField.setText(evaluations.get(i).getEvaluatingSupervisor());
-            evaluationPanel.add(evaluatingSupervisorTextField);
-            evaluationPanel.add(notesLabel);
-            notesArea.setText(evaluations.get(i).getEmployeenotes());
-            evaluationPanel.add(notesArea);
-        }
         evaluationPanel.add(new JPanel());
         evaluationPanel.add(addEvaluationButton);
         evaluationPanel.add(new JLabel());
