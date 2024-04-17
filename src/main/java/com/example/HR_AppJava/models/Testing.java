@@ -160,7 +160,7 @@ public class Testing {
         User employee = new User("JDoeJr", "jdoejr@email.com", "password", "Industry Inc.", false);
         TempArrays.addUser(boss);
         TempArrays.addUser(employee);
-        boss.createReview(boss, employee);
+        boss.createReview(boss, employee, "", "");
 
        
         //EmployeeEvaluation tests

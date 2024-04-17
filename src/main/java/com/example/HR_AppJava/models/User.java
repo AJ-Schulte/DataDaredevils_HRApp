@@ -81,11 +81,11 @@ public class User {
     }
 
     //Manager Functions - Ethan
-    public void createReview(User manager, User employee){
+    public void createReview(User manager, User employee, String mentalStateIn, String employeeNotesIn){
         if(!manager.isSupervisor) return;
         if(!manager.company.equals(employee.company)) return;
-        String mentalState=""; //TODO: Input Mental state
-        String employeeNotes=""; //TODO: Input Employee notes
+        String mentalState=mentalStateIn;
+        String employeeNotes=employeeNotesIn;
         EmployeeEvaluation review = new EmployeeEvaluation(manager.username, (LocalDate.now().getMonthValue()*1000000 + LocalDate.now().getDayOfMonth()*10000 + LocalDate.now().getYear()), mentalState, employeeNotes);
         TempArrays.addToEmployeeEvaluation(review);
     }
