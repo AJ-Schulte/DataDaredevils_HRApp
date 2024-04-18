@@ -1,5 +1,7 @@
 package com.example.HR_AppJava.models;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -76,5 +78,15 @@ public class User {
 
     public void setIsSupervisor(boolean isSupervisor) {
         this.isSupervisor = isSupervisor;
+    }
+
+    //Manager Functions - Ethan
+    public void createReview(User manager, User employee, String mentalStateIn, String employeeNotesIn){
+        if(!manager.isSupervisor) return;
+        if(!manager.company.equals(employee.company)) return;
+        String mentalState=mentalStateIn;
+        String employeeNotes=employeeNotesIn;
+        EmployeeEvaluation review = new EmployeeEvaluation(manager.username, (LocalDate.now().getMonthValue()*1000000 + LocalDate.now().getDayOfMonth()*10000 + LocalDate.now().getYear()), mentalState, employeeNotes);
+        TempArrays.addToEmployeeEvaluation(review);
     }
 }
