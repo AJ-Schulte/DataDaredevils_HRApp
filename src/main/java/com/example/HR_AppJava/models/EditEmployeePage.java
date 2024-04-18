@@ -120,7 +120,8 @@ public class EditEmployeePage extends JFrame {
                 softSkillsArea2 = new JTextArea();
                 talentsArea2 = new JTextArea();
 
-                JSpinner lengthSpinner2 = new JSpinner(numberModel);
+                SpinnerNumberModel numberModel2 = new SpinnerNumberModel(0, 0, 10000, 1);
+                JSpinner lengthSpinner2 = new JSpinner(numberModel2);
 
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
