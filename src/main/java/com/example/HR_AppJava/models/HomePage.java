@@ -8,8 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class HomePage extends JFrame {
-    private JButton homeButton, userButton, addData, editData;
+    private JButton homeButton, userButton, addData, editData, searchButton;
     private JTable table;
+    private JTextField searchBox;
 
     public HomePage() {
         setTitle("HR App");
@@ -21,7 +22,11 @@ public class HomePage extends JFrame {
         userButton = new JButton("User");
         addData = new JButton("Add");
         editData = new JButton("Edit");
+        searchButton = new JButton("Search");
 
+        searchBox = new JTextField();
+
+        // Creates the table of employees
         String[] columnNames = { "ID", "Name", "E-Mail", "Phone Number", "Current Team" };
         String[][] demographicsData = new String[TempArrays.getDemographicSize()][5];
         for (int i = 0; i < TempArrays.getDemographicSize(); i++) {
@@ -33,8 +38,9 @@ public class HomePage extends JFrame {
             demographicsData[i][4] = TempArrays.getDemographic(i).getCurrentTeam();
         }
         table = new JTable();
-        table.setSelectionMode(0);
+        table.setSelectionMode(0); // Make user only able to select 1 Employee at a time
         DefaultTableModel tableModel = new DefaultTableModel(demographicsData, columnNames) {
+            // Prevent User from Editing cells directly in table
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -42,6 +48,7 @@ public class HomePage extends JFrame {
         };
         table.setModel(tableModel);
 
+        // Action listeners
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -73,6 +80,23 @@ public class HomePage extends JFrame {
             }
         });
 
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String name = searchBox.getText();
+                int i;
+                for (i = 0; i < TempArrays.getDemographicSize(); i++) {
+                    if (TempArrays.getDemographic(i).getName().equals(name)) {
+                        break;
+                    }
+                }
+                if (i >= TempArrays.getDemographicSize())
+                    JOptionPane.showMessageDialog(null, "Employee Does Not Exist");
+                else if (TempArrays.getDemographic(i).getName().equals(name))
+                    new EditEmployeePage(TempArrays.searchDemographic(i));
+            }
+        });
+
         // Adding Panes to the Window
         JScrollPane tablePane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
@@ -95,10 +119,12 @@ public class HomePage extends JFrame {
         tablePanel.setPreferredSize(new Dimension(800, 200));
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(1, 2));
+        buttonPanel.setLayout(new GridLayout(2, 2));
         buttonPanel.setPreferredSize(new Dimension(200, 100));
         buttonPanel.add(addData);
         buttonPanel.add(editData);
+        buttonPanel.add(searchBox);
+        buttonPanel.add(searchButton);
 
         tablePanel.add(buttonPanel);
         tablePanel.add(tablePane);

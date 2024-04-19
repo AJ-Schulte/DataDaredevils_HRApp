@@ -35,7 +35,12 @@ public class SignUpPage extends JFrame {
                 String username = userTXT.getText();
                 char[] password = passwordTXT.getPassword();
                 boolean isSupervisor = isSupervisorCheck.isSelected();
-                signUp(username, password, isSupervisor);
+                if (TempArrays.searchForUser(username, password) == -1)
+                    signUp(username, password, isSupervisor);
+                else if (!username.equals("") && !String.valueOf(password).equals(""))
+                    JOptionPane.showMessageDialog(null, "User already exists");
+                else
+                    JOptionPane.showMessageDialog(null, "No Username or Password entered.");
             }
         });
 
