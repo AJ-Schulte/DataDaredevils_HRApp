@@ -141,7 +141,7 @@ public class TempArrays {
         employeeEvaluation.remove(fired);
     }
 
-    public static Object getEmployeeEvaluation(int index) {
+    public static EmployeeEvaluation getEmployeeEvaluation(int index) {
         return employeeEvaluation.get(index);
     }
 
