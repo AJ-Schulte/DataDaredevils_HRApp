@@ -32,7 +32,10 @@ public class LoginPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = usernameTXT.getText();
                 char[] password = passwordTXT.getPassword();
-                login(username, password);
+                if (!username.equals("") && !String.valueOf(password).equals(""))
+                    login(username, password);
+                else
+                    JOptionPane.showMessageDialog(null, "Username or Password entered incorrectly");
             }
         });
 

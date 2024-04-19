@@ -75,7 +75,7 @@ public class TempArrays {
         return employeeDemographicsArray.size();
     }
 
-    public static EmployeeDemographics searchDemographic(int memberID) throws Exception {
+    public static EmployeeDemographics searchDemographic(int memberID) {
         EmployeeDemographics output = null; // output is initialized to null to prevent polluting the database with a
                                             // dummy object
 
@@ -90,8 +90,9 @@ public class TempArrays {
             return output; // if output was changed, it's pointing to the matching true object and we can
                            // return it normally
         } else {
-            throw new Exception("Employee could not be found."); // otherwise we don't have an object to return and it
-                                                                 // throws an exception instead
+            throw new RuntimeException("Employee could not be found."); // otherwise we don't have an object to return
+                                                                        // and it
+            // throws an exception instead
         }
     } // This architecture should work for any field of EmployeeDemographics, but it
       // can't detect duplicates.
@@ -115,6 +116,15 @@ public class TempArrays {
         return jobHistory.get(index);
     }
 
+    public static ArrayList<EmployeeJobHistory> getAllJobHistories(int memberID) {
+        ArrayList<EmployeeJobHistory> indexes = new ArrayList<>();
+        for (int i = 0; i < jobHistory.size(); i++) {
+            if (jobHistory.get(i).getEmployeeMemberID() == memberID)
+                indexes.add(jobHistory.get(i));
+        }
+        return indexes;
+    }
+
     // EmployeeEvaluation (Noah)
     private static ArrayList<EmployeeEvaluation> employeeEvaluation = new ArrayList<>();
 
@@ -133,5 +143,14 @@ public class TempArrays {
 
     public static EmployeeEvaluation getEmployeeEvaluation(int index) {
         return employeeEvaluation.get(index);
+    }
+
+    public static ArrayList<EmployeeEvaluation> getAllEvaluations(int memberID) {
+        ArrayList<EmployeeEvaluation> indexes = new ArrayList<>();
+        for (int i = 0; i < employeeEvaluation.size(); i++) {
+            if (employeeEvaluation.get(i).getEmployeeMemberID() == memberID)
+                indexes.add(employeeEvaluation.get(i));
+        }
+        return indexes;
     }
 }

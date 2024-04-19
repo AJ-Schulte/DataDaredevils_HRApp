@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 public class UserPage extends JFrame {
     private JButton homeButton, userButton, editSaveButton;
     private JTextField userNameText, passwordText, emailText, companyText;
+    private JCheckBox isSupervisorCheck;
 
     public UserPage() {
         setTitle("HR App");
@@ -23,17 +24,22 @@ public class UserPage extends JFrame {
         JLabel passwordLabel = new JLabel("Password: ");
         JLabel emailLabel = new JLabel("E-Mail: ");
         JLabel companyLabel = new JLabel("Company Name: ");
+        JLabel superVisorLabel = new JLabel("Supervisor? ");
         JLabel blankLabel = new JLabel("");
         userNameText = new JTextField(TempArrays.getUser(LoginPage.getCurrentUser()).getUsername());
         passwordText = new JTextField(TempArrays.getUser(LoginPage.getCurrentUser()).getPassword());
         emailText = new JTextField(TempArrays.getUser(LoginPage.getCurrentUser()).getEmail());
         companyText = new JTextField(TempArrays.getUser(LoginPage.getCurrentUser()).getCompany());
+        isSupervisorCheck = new JCheckBox();
+        isSupervisorCheck.setSelected(TempArrays.getUser(LoginPage.getCurrentUser()).getIsSupervisor());
 
         userNameText.setEditable(false);
         passwordText.setEditable(false);
         emailText.setEditable(false);
         companyText.setEditable(false);
+        isSupervisorCheck.setEnabled(false);
 
+        // Brings user to Home Page
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,22 +48,27 @@ public class UserPage extends JFrame {
             }
         });
 
+        // Edit / Save button which should change the users information
         editSaveButton.addActionListener(new ActionListener() {
             boolean isClicked = false;
             User currentUser = TempArrays.getUser(LoginPage.getCurrentUser());
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Need to make data entered save to database and update as user moves through
+                // pages
                 if (!isClicked) {
                     editSaveButton.setText("Save");
                     userNameText.setEditable(true);
                     passwordText.setEditable(true);
                     emailText.setEditable(true);
                     companyText.setEditable(true);
+                    isSupervisorCheck.setEnabled(true);
                     currentUser.setUsername(userNameText.getText());
                     currentUser.setPassword(passwordText.getText());
                     currentUser.setEmail(emailText.getText());
                     currentUser.setCompany(companyText.getText());
+                    currentUser.setIsSupervisor(isSupervisorCheck.isSelected());
                     TempArrays.setUser(LoginPage.getCurrentUser(), currentUser);
                 } else {
                     editSaveButton.setText("Edit");
@@ -65,9 +76,9 @@ public class UserPage extends JFrame {
                     passwordText.setEditable(false);
                     emailText.setEditable(false);
                     companyText.setEditable(false);
+                    isSupervisorCheck.setEnabled(false);
                 }
                 isClicked = !isClicked;
-
             }
         });
 
@@ -85,7 +96,7 @@ public class UserPage extends JFrame {
         gluePanel1.add(Box.createVerticalGlue(), BorderLayout.SOUTH);
 
         JPanel userInfoPanel = new JPanel();
-        userInfoPanel.setLayout(new GridLayout(5, 2));
+        userInfoPanel.setLayout(new GridLayout(6, 2));
         userInfoPanel.setPreferredSize(new Dimension(400, 200));
         userInfoPanel.add(blankLabel);
         userInfoPanel.add(editSaveButton);
@@ -97,6 +108,8 @@ public class UserPage extends JFrame {
         userInfoPanel.add(emailText);
         userInfoPanel.add(companyLabel);
         userInfoPanel.add(companyText);
+        userInfoPanel.add(superVisorLabel);
+        userInfoPanel.add(isSupervisorCheck);
 
         JPanel gluePanel2 = new JPanel(new BorderLayout());
         gluePanel2.add(userInfoPanel, BorderLayout.WEST);

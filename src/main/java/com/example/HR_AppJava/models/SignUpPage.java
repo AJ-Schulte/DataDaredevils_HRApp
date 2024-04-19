@@ -9,6 +9,7 @@ public class SignUpPage extends JFrame {
     private JButton createUserButton;
     private JTextField userTXT;
     private JPasswordField passwordTXT;
+    private JCheckBox isSupervisorCheck;
 
     public SignUpPage() {
         setTitle("HR App");
@@ -18,9 +19,11 @@ public class SignUpPage extends JFrame {
 
         JLabel usernameLabel = new JLabel("Username: ");
         JLabel passwordLabel = new JLabel("Password: ");
+        JLabel isSupervisorLabel = new JLabel("Are you a Supervisor? ");
 
         userTXT = new JTextField();
         passwordTXT = new JPasswordField();
+        isSupervisorCheck = new JCheckBox();
 
         createUserButton = new JButton("Sign Up");
 
@@ -31,7 +34,13 @@ public class SignUpPage extends JFrame {
                 // Creates a new user
                 String username = userTXT.getText();
                 char[] password = passwordTXT.getPassword();
-                signUp(username, password);
+                boolean isSupervisor = isSupervisorCheck.isSelected();
+                if (TempArrays.searchForUser(username, password) == -1)
+                    signUp(username, password, isSupervisor);
+                else if (!username.equals("") && !String.valueOf(password).equals(""))
+                    JOptionPane.showMessageDialog(null, "User already exists");
+                else
+                    JOptionPane.showMessageDialog(null, "No Username or Password entered.");
             }
         });
 
@@ -40,15 +49,17 @@ public class SignUpPage extends JFrame {
         add(userTXT);
         add(passwordLabel);
         add(passwordTXT);
+        add(isSupervisorLabel);
+        add(isSupervisorCheck);
         add(createUserButton);
 
         // make frame visible
         setVisible(true);
     }
 
-    private void signUp(String username, char[] password) {
+    private void signUp(String username, char[] password, boolean supervisor) {
         // creates new user with details provided and automatically moves to login page
-        User newUser = new User(username, null, String.valueOf(password), null, false);
+        User newUser = new User(username, null, String.valueOf(password), null, supervisor);
         TempArrays.addUser(newUser);
         JOptionPane.showMessageDialog(this, "Successfully Created a New Account");
         new LoginPage();

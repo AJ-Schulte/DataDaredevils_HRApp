@@ -4,7 +4,13 @@
  * Feel free to add your own tests as needed.
  */
 package com.example.HR_AppJava.models;
+
+<<<<<<<HEAD
+
+import java.time.Instant;
+import java.util.Date;=======>>>>>>>main
 import java.util.Random;
+
 public class Testing {
     private static Random rnd = new Random();
 
@@ -114,7 +120,9 @@ public class Testing {
                     break;
 
                 case 2:
-                    TempArrays.addToJobHistory(new EmployeeJobHistory(fullString, fullString, rnd.nextInt(40), fullString, fullString));
+                    TempArrays.addToJobHistory(
+                            new EmployeeJobHistory(fullString, fullString, rnd.nextInt(40), fullString, fullString,
+                                    i - 1));
                     break;
 
                 case 3:
@@ -122,7 +130,9 @@ public class Testing {
                     break;
 
                 case 4:
-                    TempArrays.addToEmployeeEvaluation(new EmployeeEvaluation(fullString, rnd.nextInt(12319999), fullString, fullString));
+                    TempArrays.addToEmployeeEvaluation(
+                            new EmployeeEvaluation(fullString, Date.from(Instant.now()), fullString, fullString,
+                                    i - 1));
             }
             // What follows is the base-26 wizardry to make the chars increment correctly.
             p5 = lookup(i % 26);
@@ -149,22 +159,27 @@ public class Testing {
         System.out.println(TempArrays.searchDemographic(rnd.nextInt(1000000-2)).toString());
         long t2 = System.currentTimeMillis();
         System.out.println("Demographics array search time: " + (t2-t1) + "ms");
-        System.out.println(TempArrays.searchDemographic(1000000-2).toString());
-       
-        //EmployeeJobHistory tests
-        //arrayGen(2);
-       
-        //User tests
-        //arrayGen(3);
-        User boss = new User("JDoe", "jdoe@email.com", "1234", "Industry Inc.", true);
-        User employee = new User("JDoeJr", "jdoejr@email.com", "password", "Industry Inc.", false);
-        TempArrays.addUser(boss);
-        TempArrays.addUser(employee);
-        boss.createReview(boss, employee, "", "");
+     
 
        
-        //EmployeeEvaluation tests
+        // EmployeeJobHistory tests
+        //arrayGen(2);
+       
+        //User tests  
+        //arrayGen(3);
+        User boss = new User("JDoe", "jdoe@email.com", "1234", "Ind u stry Inc.", true);
+        User employee = new User("JDoeJr", "jdoejr@email.com",  " password", "Ind
+
+        Te mpArrays.addUser(employee);
+        bo ss.createRev
+
+         
+        // EmployeeEvaluation tests
         //arrayGen(4);
         System.out.println(TempArrays.getEmployeeEvaluation(0).getEmployeenotes()+"; "+TempArrays.getEmployeeEvaluation(0).getMentalstate()+"; "+TempArrays.getEmployeeEvaluation(0).getDateofEval());
     }
 }
+
+            
+                   
+                 

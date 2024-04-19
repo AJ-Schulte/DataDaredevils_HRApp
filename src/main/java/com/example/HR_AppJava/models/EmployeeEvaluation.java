@@ -1,26 +1,29 @@
 package com.example.HR_AppJava.models;
 
+import java.util.Date;
 
 public class EmployeeEvaluation {
 
-    private Integer dateOfEval;
+    private Date dateOfEval;
     private String mentalState;
     private String employeeNotes;
     private String evaluatingSupervisor;
+    private int memberID;
 
-    public EmployeeEvaluation(String evaluatingSupervisor, Integer dateOfEval, String mentalState,
-            String employeeNotes) {
+    public EmployeeEvaluation(String evaluatingSupervisor, Date dateOfEval, String mentalState,
+            String employeeNotes, int memberID) {
         this.evaluatingSupervisor = evaluatingSupervisor;
         this.dateOfEval = dateOfEval;
         this.mentalState = mentalState;
         this.employeeNotes = employeeNotes;
+        this.memberID = memberID;
     }
 
     public String getEvaluatingSupervisor() {
         return evaluatingSupervisor;
     }
 
-    public Integer getDateofEval() {
+    public Date getDateofEval() {
         return dateOfEval;
     }
 
@@ -32,12 +35,16 @@ public class EmployeeEvaluation {
         return employeeNotes;
     }
 
+    public int getEmployeeMemberID() {
+        return memberID;
+    }
+
     // Setters
     public void setEvaluatingSupervisor(String evaluatingSupervisor) {
         this.evaluatingSupervisor = evaluatingSupervisor;
     }
 
-    public void setDateofEval(Integer dateOfEval) {
+    public void setDateofEval(Date dateOfEval) {
         this.dateOfEval = dateOfEval;
     }
 
