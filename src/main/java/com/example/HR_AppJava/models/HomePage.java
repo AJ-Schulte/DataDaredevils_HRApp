@@ -2,10 +2,11 @@ package com.example.HR_AppJava.models;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class HomePage extends JFrame {
     private JButton homeButton, userButton, addData, editData, searchButton;
@@ -24,7 +25,7 @@ public class HomePage extends JFrame {
         editData = new JButton("Edit");
         searchButton = new JButton("Search");
 
-        searchBox = new JTextField();
+        searchBox = new JTextField("Enter Name of Employee Here");
 
         // Creates the table of employees
         String[] columnNames = { "ID", "Name", "E-Mail", "Phone Number", "Current Team" };
@@ -92,8 +93,24 @@ public class HomePage extends JFrame {
                 }
                 if (i >= TempArrays.getDemographicSize())
                     JOptionPane.showMessageDialog(null, "Employee Does Not Exist");
-                else if (TempArrays.getDemographic(i).getName().equals(name))
+                else if (TempArrays.getDemographic(i).getName().equals(name)) {
                     new EditEmployeePage(TempArrays.searchDemographic(i));
+                    searchBox.setText("Enter Name of Employee Here");
+                }
+            }
+        });
+
+        searchBox.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (searchBox.getText().equals("Enter Name of Employee Here"))
+                    searchBox.setText("");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (searchBox.getText().isEmpty())
+                    searchBox.setText("Enter Name of Employee Here");
             }
         });
 
