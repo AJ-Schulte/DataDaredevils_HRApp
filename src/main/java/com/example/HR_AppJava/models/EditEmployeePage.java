@@ -22,7 +22,7 @@ public class EditEmployeePage extends JFrame {
     private JTextArea critSkillsArea, softSkillsArea, talentsArea, notesArea;
     private JSpinner lengthSpinner, dateOfEvalSpinner;
 
-    public EditEmployeePage(EmployeeDemographics employee) {
+    public EditEmployeePage(EmployeeDemographics employee) throws Exception{
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 600));
@@ -90,13 +90,13 @@ public class EditEmployeePage extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Save Data to Database(Temp Arrays) here
+                // TODO: Save data to EmployeeDemographics database
 
                 dispose();
             }
         });
 
-        // Create a new EmployyeJobHistory object that is connected to this employee
+        // Create a new EmployeeJobHistory object that is connected to this employee
         addHistoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,7 +126,7 @@ public class EditEmployeePage extends JFrame {
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Save info from text fields to database
+                        // TODO: Save info from text fields to EmployeeJobHistory database
 
                         addHistoryFrame.dispose();
                     }
@@ -196,7 +196,7 @@ public class EditEmployeePage extends JFrame {
                 evaluationButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Save info from text fields to database
+                        // TODO: Save info from text fields to EmployeeEvaluation database
 
                         evaluationFrame.dispose();
                     }

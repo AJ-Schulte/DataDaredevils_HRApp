@@ -85,13 +85,13 @@ public class AddEmployeePage extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Save Data to Database(Temp Arrays) here
+                // TODO: Save data to EmployeeDemographics database
 
                 dispose();
             }
         });
 
-        // Create a new EmployyeJobHistory object that is connected to this employee
+        // Create a new EmployeeJobHistory object that is connected to this employee
         addHistoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,7 +109,7 @@ public class AddEmployeePage extends JFrame {
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Save info from text fields to database
+                        // TODO: Save info from text fields to EmployeeJobHistory database
 
                         addHistoryFrame.dispose();
                     }
@@ -164,7 +164,7 @@ public class AddEmployeePage extends JFrame {
                 evaluationButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Save info from text fields to database
+                        // TODO: Save info from text fields to EmployeeEvaluation database
 
                         evaluationFrame.dispose();
                     }

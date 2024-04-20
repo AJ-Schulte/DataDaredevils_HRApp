@@ -1,6 +1,7 @@
 package com.example.HR_AppJava.models;
 
-import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String username;
     private String email;
@@ -32,11 +33,11 @@ public class User {
 
     // Getters and setters for all fields
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -84,9 +85,13 @@ public class User {
     public void createReview(User manager, User employee, String mentalStateIn, String employeeNotesIn){
         if(!manager.isSupervisor) return;
         if(!manager.company.equals(employee.company)) return;
-        String mentalState=mentalStateIn;
-        String employeeNotes=employeeNotesIn;
-        EmployeeEvaluation review = new EmployeeEvaluation(manager.username, (LocalDate.now().getMonthValue()*1000000 + LocalDate.now().getDayOfMonth()*10000 + LocalDate.now().getYear()), mentalState, employeeNotes);
+        String mentalState = mentalStateIn;
+        String employeeNotes = employeeNotesIn;
+        Calendar calendar = Calendar.getInstance();
+        Date reviewDate = calendar.getTime();
+        EmployeeEvaluation review = new EmployeeEvaluation(manager.username, reviewDate , mentalState, employeeNotes, employee.getId());
+        System.out.println("Created review");
         TempArrays.addToEmployeeEvaluation(review);
+        System.out.println("Saved review");
     }
 }

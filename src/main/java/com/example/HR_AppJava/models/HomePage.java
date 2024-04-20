@@ -67,14 +67,19 @@ public class HomePage extends JFrame {
             }
         });
 
-        editData.addActionListener(new ActionListener() {
+        editData.addActionListener (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (table.getSelectedRow() != -1) {
                     int column = 0;
                     int row = table.getSelectedRow();
                     int value = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-                    new EditEmployeePage(TempArrays.searchDemographic(value));
+                    try {
+                        new EditEmployeePage(TempArrays.searchDemographic(value));
+                    } catch (Exception e1) {
+                        // TODO: Auto-generated this catch block. This needs to handle the case where searchDemographic() can't find a matching object.
+                        e1.printStackTrace();
+                    }
                 } else {
                     unselected();
                 }
@@ -94,7 +99,12 @@ public class HomePage extends JFrame {
                 if (i >= TempArrays.getDemographicSize())
                     JOptionPane.showMessageDialog(null, "Employee Does Not Exist");
                 else if (TempArrays.getDemographic(i).getName().equals(name)) {
-                    new EditEmployeePage(TempArrays.searchDemographic(i));
+                    try {
+                        new EditEmployeePage(TempArrays.searchDemographic(i));
+                    } catch (Exception e1) {
+                        // TODO: Auto-generated this catch block. This needs to handle the case where searchDemographic() can't find a matching object.
+                        e1.printStackTrace();
+                    }
                     searchBox.setText("Enter Name of Employee Here");
                 }
             }
