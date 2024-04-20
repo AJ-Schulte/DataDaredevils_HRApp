@@ -164,7 +164,7 @@ public class Testing {
        
         //User tests  
         //arrayGen(3);
-        User boss = new User("JDoe", "jdoe@email.com", "1234", "Ind u stry Inc.", true);
+        User boss = new User("JDoe", "jdoe@email.com", "1234", "Industry Inc.", true);
         User employee = new User("JDoeJr", "jdoejr@email.com", "password", "Industry Inc.", false);
         boss.setId(1);
         employee.setId(2);

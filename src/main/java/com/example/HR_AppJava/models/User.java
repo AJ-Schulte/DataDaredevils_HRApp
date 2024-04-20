@@ -90,8 +90,6 @@ public class User {
         Calendar calendar = Calendar.getInstance();
         Date reviewDate = calendar.getTime();
         EmployeeEvaluation review = new EmployeeEvaluation(manager.username, reviewDate , mentalState, employeeNotes, employee.getId());
-        System.out.println("Created review");
         TempArrays.addToEmployeeEvaluation(review);
-        System.out.println("Saved review");
     }
 }
