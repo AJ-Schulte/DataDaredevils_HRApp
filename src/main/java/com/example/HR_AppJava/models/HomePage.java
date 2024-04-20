@@ -1,3 +1,8 @@
+/*
+ * This is the page you land on after login.
+ * TODO: It would be convenient if it updated the display after an add or edit without switching to UserPage and back.
+ */
+
 package com.example.HR_AppJava.models;
 
 import javax.swing.*;
@@ -62,19 +67,24 @@ public class HomePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EmployeeDemographics newEmployee = new EmployeeDemographics(null, null, null, null, null);
-                TempArrays.addDemographic(newEmployee);
                 new AddEmployeePage(newEmployee);
+                //The empty fields are fixed in AddEmployeePage.
             }
-        });
+        }); //Note: be careful changing this method, it comes close to adding ghost info to the database.
 
-        editData.addActionListener(new ActionListener() {
+        editData.addActionListener (new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (table.getSelectedRow() != -1) {
                     int column = 0;
                     int row = table.getSelectedRow();
                     int value = Integer.parseInt(table.getModel().getValueAt(row, column).toString());
-                    new EditEmployeePage(TempArrays.searchDemographic(value));
+                    try {
+                        new EditEmployeePage(TempArrays.searchDemographic(value));
+                    } catch (Exception e1) {
+                        // TODO: Auto-generated this catch block. This needs to handle the case where searchDemographic() can't find a matching object.
+                        e1.printStackTrace();
+                    }
                 } else {
                     unselected();
                 }
@@ -94,7 +104,12 @@ public class HomePage extends JFrame {
                 if (i >= TempArrays.getDemographicSize())
                     JOptionPane.showMessageDialog(null, "Employee Does Not Exist");
                 else if (TempArrays.getDemographic(i).getName().equals(name)) {
-                    new EditEmployeePage(TempArrays.searchDemographic(i));
+                    try {
+                        new EditEmployeePage(TempArrays.searchDemographic(i));
+                    } catch (Exception e1) {
+                        // TODO: Auto-generated this catch block. This needs to handle the case where searchDemographic() can't find a matching object.
+                        e1.printStackTrace();
+                    }
                     searchBox.setText("Enter Name of Employee Here");
                 }
             }

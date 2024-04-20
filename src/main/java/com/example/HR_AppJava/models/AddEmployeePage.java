@@ -1,3 +1,9 @@
+/*
+ * This is the page that pops up when you click "Add" from the Home page.
+ * It has a sort of dependency - since EmployeeDemographics employee was created on HomePage, employee must be filled out, or else there will be an empty index.
+ * TODO: Cancelability? (Without leaving an empty index)
+ */
+
 package com.example.HR_AppJava.models;
 
 import javax.swing.*;
@@ -22,6 +28,7 @@ public class AddEmployeePage extends JFrame {
     private JSpinner lengthSpinner, dateOfEvalSpinner;
 
     public AddEmployeePage(EmployeeDemographics employee) {
+        final int memberID = employee.getMemberID();
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 600));
@@ -85,13 +92,12 @@ public class AddEmployeePage extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Save Data to Database(Temp Arrays) here
-
+                TempArrays.setDemographic(TempArrays.getDemographicSize()-1, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
                 dispose();
             }
         });
 
-        // Create a new EmployyeJobHistory object that is connected to this employee
+        // Create a new EmployeeJobHistory object that is connected to this employee
         addHistoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -109,8 +115,9 @@ public class AddEmployeePage extends JFrame {
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Save info from text fields to database
-
+                        // TODO: Save info from text fields to EmployeeJobHistory database (Ethan attempted this but it doesn't currently work)
+                        EmployeeJobHistory test = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
+                        TempArrays.addToJobHistory(test);
                         addHistoryFrame.dispose();
                     }
                 });
@@ -164,7 +171,7 @@ public class AddEmployeePage extends JFrame {
                 evaluationButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Save info from text fields to database
+                        // TODO: Save info from text fields to EmployeeEvaluation database
 
                         evaluationFrame.dispose();
                     }

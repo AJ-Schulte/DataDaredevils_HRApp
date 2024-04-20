@@ -4,11 +4,8 @@
  * Feel free to add your own tests as needed.
  */
 package com.example.HR_AppJava.models;
-
-<<<<<<<HEAD
-
 import java.time.Instant;
-import java.util.Date;=======>>>>>>>main
+import java.util.Date;
 import java.util.Random;
 
 public class Testing {
@@ -116,7 +113,7 @@ public class Testing {
             fullString = "" + p1 + p2 + p3 + p4 + p5;
             switch (mode) {
                 case 1:
-                    TempArrays.addDemographic(new EmployeeDemographics(fullString, fullString, fullString, fullString, fullString));
+                    new EmployeeDemographics(fullString, fullString, fullString, fullString, fullString);
                     break;
 
                 case 2:
@@ -167,19 +164,17 @@ public class Testing {
        
         //User tests  
         //arrayGen(3);
-        User boss = new User("JDoe", "jdoe@email.com", "1234", "Ind u stry Inc.", true);
-        User employee = new User("JDoeJr", "jdoejr@email.com",  " password", "Ind
-
-        Te mpArrays.addUser(employee);
-        bo ss.createRev
+        User boss = new User("JDoe", "jdoe@email.com", "1234", "Industry Inc.", true);
+        User employee = new User("JDoeJr", "jdoejr@email.com", "password", "Industry Inc.", false);
+        boss.setId(1);
+        employee.setId(2);
+        TempArrays.addUser(boss);
+        TempArrays.addUser(employee);
+        boss.createReview(boss, employee, "Cheery", "Slightly late");
 
          
         // EmployeeEvaluation tests
         //arrayGen(4);
-        System.out.println(TempArrays.getEmployeeEvaluation(0).getEmployeenotes()+"; "+TempArrays.getEmployeeEvaluation(0).getMentalstate()+"; "+TempArrays.getEmployeeEvaluation(0).getDateofEval());
+        System.out.println(TempArrays.getEmployeeEvaluation(0).getEmployeenotes()+"; "+TempArrays.getEmployeeEvaluation(0).getMentalstate()+"; "/*+TempArrays.getEmployeeEvaluation(0).getDateofEval()*/);
     }
 }
-
-            
-                   
-                 

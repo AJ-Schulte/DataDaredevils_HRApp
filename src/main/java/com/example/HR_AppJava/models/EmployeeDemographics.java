@@ -21,13 +21,10 @@ public class EmployeeDemographics {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        memberID = memberIDPosition; // autoassigns an ID; since memberIDPosition is static, new instanciations won't
-                                     // override it
+        memberID = memberIDPosition; // autoassigns an ID; since memberIDPosition is static, new instanciations won't override it
         memberIDPosition++;
         this.currentTeam = currentTeam;
-        // save(); // The autosave is convienent but I can see how it might cause
-        // problems. Remove
-        // it if needed.
+        save(); // The autosave is convienent but I can see how it might cause problems. Remove it if needed.
     }
 
     // Getters

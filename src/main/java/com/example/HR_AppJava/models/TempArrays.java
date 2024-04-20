@@ -67,17 +67,24 @@ public class TempArrays {
         return employeeDemographicsArray.get(i);
     }
 
-    public static void setDemographic(int i, EmployeeDemographics e) {
+    public static void setDemographic(int i, EmployeeDemographics e){
         employeeDemographicsArray.set(i, e);
+    }
+
+    public static void setDemographic(int i, String name, String address, String phoneNumber, String email, String currentTeam) {
+        employeeDemographicsArray.get(i).setName(name);
+        employeeDemographicsArray.get(i).setAddress(address);
+        employeeDemographicsArray.get(i).setPhoneNumber(phoneNumber);;
+        employeeDemographicsArray.get(i).setEmail(email);
+        employeeDemographicsArray.get(i).setCurrentTeam(currentTeam);
     }
 
     public static int getDemographicSize() {
         return employeeDemographicsArray.size();
     }
 
-    public static EmployeeDemographics searchDemographic(int memberID) {
-        EmployeeDemographics output = null; // output is initialized to null to prevent polluting the database with a
-                                            // dummy object
+    public static EmployeeDemographics searchDemographic(int memberID) throws Exception{
+        EmployeeDemographics output = null; // output is initialized to null to prevent polluting the database with a dummy object
 
         for (int i = 0; i < employeeDemographicsArray.size(); i++) {
             if (employeeDemographicsArray.get(i).getMemberID() == memberID) {
@@ -87,15 +94,11 @@ public class TempArrays {
         }
 
         if (output != null) {
-            return output; // if output was changed, it's pointing to the matching true object and we can
-                           // return it normally
+            return output; // if output was changed, it's pointing to the matching true object and we can return it normally
         } else {
-            throw new RuntimeException("Employee could not be found."); // otherwise we don't have an object to return
-                                                                        // and it
-            // throws an exception instead
+            throw new Exception("Employee could not be found."); // otherwise we don't have an object to return and it throws an exception instead
         }
-    } // This architecture should work for any field of EmployeeDemographics, but it
-      // can't detect duplicates.
+    } // This architecture should work for any field of EmployeeDemographics, but it can't detect duplicates.
 
     // EmployeeJobHistory (AJ)
     private static ArrayList<EmployeeJobHistory> jobHistory = new ArrayList<>();

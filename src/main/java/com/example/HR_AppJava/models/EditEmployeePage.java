@@ -1,3 +1,7 @@
+/*
+ * This is the page that pops up when you click "Edit" from the Home page.
+ */
+
 package com.example.HR_AppJava.models;
 
 import javax.swing.*;
@@ -22,13 +26,14 @@ public class EditEmployeePage extends JFrame {
     private JTextArea critSkillsArea, softSkillsArea, talentsArea, notesArea;
     private JSpinner lengthSpinner, dateOfEvalSpinner;
 
-    public EditEmployeePage(EmployeeDemographics employee) {
+    public EditEmployeePage(EmployeeDemographics employee) throws Exception{
+        final int memberID = employee.getMemberID();
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 600));
 
-        ArrayList<EmployeeJobHistory> jobHistories = TempArrays.getAllJobHistories(employee.getMemberID());
-        ArrayList<EmployeeEvaluation> evaluations = TempArrays.getAllEvaluations(employee.getMemberID());
+        ArrayList<EmployeeJobHistory> jobHistories = TempArrays.getAllJobHistories(memberID);
+        ArrayList<EmployeeEvaluation> evaluations = TempArrays.getAllEvaluations(memberID);
 
         saveButton = new JButton("Save");
         addHistoryButton = new JButton("New Job History");
@@ -90,13 +95,12 @@ public class EditEmployeePage extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Save Data to Database(Temp Arrays) here
-
+                TempArrays.setDemographic(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
                 dispose();
             }
         });
 
-        // Create a new EmployyeJobHistory object that is connected to this employee
+        // Create a new EmployeeJobHistory object that is connected to this employee
         addHistoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,8 +130,9 @@ public class EditEmployeePage extends JFrame {
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Save info from text fields to database
-
+                        // TODO: Save info from text fields to EmployeeJobHistory database (Ethan attempted this but it doesn't currently work)
+                        EmployeeJobHistory test = new EmployeeJobHistory(companyNameTextField2.getText(), supervisorTextField2.getText(), lengthSpinner2.getValue().hashCode(), jobTitleTextField2.getText(), roleOnTeamTextField2.getText(), memberID);
+                        TempArrays.addJobHistoryAt(memberID, test);
                         addHistoryFrame.dispose();
                     }
                 });
@@ -196,7 +201,7 @@ public class EditEmployeePage extends JFrame {
                 evaluationButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // Save info from text fields to database
+                        // TODO: Save info from text fields to EmployeeEvaluation database
 
                         evaluationFrame.dispose();
                     }
