@@ -23,12 +23,13 @@ public class EditEmployeePage extends JFrame {
     private JSpinner lengthSpinner, dateOfEvalSpinner;
 
     public EditEmployeePage(EmployeeDemographics employee) throws Exception{
+        final int memberID = employee.getMemberID();
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 600));
 
-        ArrayList<EmployeeJobHistory> jobHistories = TempArrays.getAllJobHistories(employee.getMemberID());
-        ArrayList<EmployeeEvaluation> evaluations = TempArrays.getAllEvaluations(employee.getMemberID());
+        ArrayList<EmployeeJobHistory> jobHistories = TempArrays.getAllJobHistories(memberID);
+        ArrayList<EmployeeEvaluation> evaluations = TempArrays.getAllEvaluations(memberID);
 
         saveButton = new JButton("Save");
         addHistoryButton = new JButton("New Job History");
@@ -91,7 +92,7 @@ public class EditEmployeePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: Save data to EmployeeDemographics database
-
+                TempArrays.setDemographic(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
                 dispose();
             }
         });
@@ -126,8 +127,9 @@ public class EditEmployeePage extends JFrame {
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // TODO: Save info from text fields to EmployeeJobHistory database
-
+                        // TODO: Save info from text fields to EmployeeJobHistory database (Ethan attempted this but it doesn't currently work)
+                        EmployeeJobHistory test = new EmployeeJobHistory(companyNameTextField2.getText(), supervisorTextField2.getText(), lengthSpinner2.getValue().hashCode(), jobTitleTextField2.getText(), roleOnTeamTextField2.getText(), memberID);
+                        TempArrays.addJobHistoryAt(memberID, test); //and pray no one ever deletes anything (TODO: Deletion integrity)
                         addHistoryFrame.dispose();
                     }
                 });

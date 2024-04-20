@@ -67,8 +67,16 @@ public class TempArrays {
         return employeeDemographicsArray.get(i);
     }
 
-    public static void setDemographic(int i, EmployeeDemographics e) {
+    public static void setDemographic(int i, EmployeeDemographics e){
         employeeDemographicsArray.set(i, e);
+    }
+
+    public static void setDemographic(int i, String name, String address, String phoneNumber, String email, String currentTeam) {
+        employeeDemographicsArray.get(i).setName(name);
+        employeeDemographicsArray.get(i).setAddress(address);
+        employeeDemographicsArray.get(i).setPhoneNumber(phoneNumber);;
+        employeeDemographicsArray.get(i).setEmail(email);
+        employeeDemographicsArray.get(i).setCurrentTeam(currentTeam);
     }
 
     public static int getDemographicSize() {
@@ -76,8 +84,7 @@ public class TempArrays {
     }
 
     public static EmployeeDemographics searchDemographic(int memberID) throws Exception{
-        EmployeeDemographics output = null; // output is initialized to null to prevent polluting the database with a
-                                            // dummy object
+        EmployeeDemographics output = null; // output is initialized to null to prevent polluting the database with a dummy object
 
         for (int i = 0; i < employeeDemographicsArray.size(); i++) {
             if (employeeDemographicsArray.get(i).getMemberID() == memberID) {

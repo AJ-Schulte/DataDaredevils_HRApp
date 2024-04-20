@@ -22,6 +22,7 @@ public class AddEmployeePage extends JFrame {
     private JSpinner lengthSpinner, dateOfEvalSpinner;
 
     public AddEmployeePage(EmployeeDemographics employee) {
+        final int memberID = employee.getMemberID();
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 600));
@@ -86,7 +87,7 @@ public class AddEmployeePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO: Save data to EmployeeDemographics database
-
+                new EmployeeDemographics(nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
                 dispose();
             }
         });
@@ -109,8 +110,9 @@ public class AddEmployeePage extends JFrame {
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // TODO: Save info from text fields to EmployeeJobHistory database
-
+                        // TODO: Save info from text fields to EmployeeJobHistory database (Ethan attempted this but it doesn't currently work)
+                        EmployeeJobHistory test = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
+                        TempArrays.addToJobHistory(test);
                         addHistoryFrame.dispose();
                     }
                 });
