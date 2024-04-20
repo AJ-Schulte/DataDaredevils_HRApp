@@ -86,8 +86,7 @@ public class AddEmployeePage extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Save data to EmployeeDemographics database
-                new EmployeeDemographics(nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
+                TempArrays.setDemographic(TempArrays.getDemographicSize()-1, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
                 dispose();
             }
         });

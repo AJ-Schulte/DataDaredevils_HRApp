@@ -62,10 +62,10 @@ public class HomePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EmployeeDemographics newEmployee = new EmployeeDemographics(null, null, null, null, null);
-                TempArrays.addDemographic(newEmployee);
                 new AddEmployeePage(newEmployee);
+                //The empty fields are fixed in AddEmployeePage.
             }
-        });
+        }); //Note: be careful changing this method, it comes close to adding ghost info to the database.
 
         editData.addActionListener (new ActionListener() {
             @Override
