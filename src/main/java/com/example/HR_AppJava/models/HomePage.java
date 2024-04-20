@@ -1,3 +1,8 @@
+/*
+ * This is the page you land on after login.
+ * TODO: It would be convenient if it updated the display after an add or edit without switching to UserPage and back.
+ */
+
 package com.example.HR_AppJava.models;
 
 import javax.swing.*;

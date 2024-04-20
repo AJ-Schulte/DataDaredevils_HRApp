@@ -1,3 +1,7 @@
+/*
+ * This is the page that pops up when you click "Edit" from the Home page.
+ */
+
 package com.example.HR_AppJava.models;
 
 import javax.swing.*;
@@ -128,7 +132,7 @@ public class EditEmployeePage extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         // TODO: Save info from text fields to EmployeeJobHistory database (Ethan attempted this but it doesn't currently work)
                         EmployeeJobHistory test = new EmployeeJobHistory(companyNameTextField2.getText(), supervisorTextField2.getText(), lengthSpinner2.getValue().hashCode(), jobTitleTextField2.getText(), roleOnTeamTextField2.getText(), memberID);
-                        TempArrays.addJobHistoryAt(memberID, test); //and pray no one ever deletes anything (TODO: Deletion integrity)
+                        TempArrays.addJobHistoryAt(memberID, test);
                         addHistoryFrame.dispose();
                     }
                 });
