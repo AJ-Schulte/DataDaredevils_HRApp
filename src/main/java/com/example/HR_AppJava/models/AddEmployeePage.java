@@ -1,7 +1,6 @@
 /*
  * This is the page that pops up when you click "Add" from the Home page.
  * It has a sort of dependency - since EmployeeDemographics employee was created on HomePage, employee must be filled out, or else there will be an empty index.
- * TODO: Cancelability? (Without leaving an empty index)
  * TODO: Refresh to show added JobHistory/EmployeeEvaluation objects?
  */
 
@@ -28,8 +27,9 @@ public class AddEmployeePage extends JFrame {
     private JTextArea critSkillsArea, softSkillsArea, talentsArea, notesArea;
     private JSpinner lengthSpinner, dateOfEvalSpinner;
 
-    public AddEmployeePage(EmployeeDemographics employee) {
-        final int memberID = employee.getMemberID();
+    public AddEmployeePage() {
+        final int memberID = IDGen.getID();
+        IDGen.manualDecrement();
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 600));
@@ -93,7 +93,12 @@ public class AddEmployeePage extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TempArrays.setDemographic(TempArrays.getDemographicSize()-1, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
+                new EmployeeDemographics(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
+                IDGen.manualIncrement();
+                EmployeeDemographics nullCheck = TempArrays.getDemographic(memberID);
+                if(nullCheck.getName().equals("") && nullCheck.getAddress().equals("") && nullCheck.getPhoneNumber().equals("") && nullCheck.getEmail().equals("") && nullCheck.getCurrentTeam().equals("")) {
+                    TempArrays.removeDemographic(nullCheck);
+                }
                 dispose();
             }
         });

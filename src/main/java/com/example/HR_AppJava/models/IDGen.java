@@ -3,14 +3,39 @@
  * Hopefully will help with id parity between objects.
 */
 package com.example.HR_AppJava.models;
+import java.util.Stack;
+//import java.util.EmptyStackException;
 public class IDGen {
-    private static int memberIDPosition = 0;
+    private static int memberIDBoundary = 0;
+    private static Stack<Integer> nextID = new Stack<>();
 
-    public static int getID() {
-        int memberID = memberIDPosition;
-        memberIDPosition++;
-        return memberID;
+    public static void startIDGenerator() {
+        nextID.push(0);
     }
 
-    //A stack that normally has the last index of the array but gets updated with indices of removed entries would help with deletion integrity.
+    public static int getID() {
+        int memberID = nextID.pop();
+        if(memberID < memberIDBoundary) {
+            return memberID;
+        } else {
+            nextID.push(memberID+1);
+            memberIDBoundary++;
+            return memberID;
+        }
+    }
+
+    public static void markFreeIndex(int i) {
+        nextID.push(i);
+    }
+
+    public static void manualDecrement() {
+        memberIDBoundary--;
+        nextID.pop();
+        nextID.push(memberIDBoundary);
+    }
+
+    public static void manualIncrement() {
+        memberIDBoundary++;
+        nextID.push(memberIDBoundary);
+    }
 }
