@@ -2,6 +2,7 @@
  * This is the page that pops up when you click "Add" from the Home page.
  * It has a sort of dependency - since EmployeeDemographics employee was created on HomePage, employee must be filled out, or else there will be an empty index.
  * TODO: Cancelability? (Without leaving an empty index)
+ * TODO: Refresh to show added JobHistory/EmployeeEvaluation objects?
  */
 
 package com.example.HR_AppJava.models;
@@ -115,9 +116,11 @@ public class AddEmployeePage extends JFrame {
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // TODO: Save info from text fields to EmployeeJobHistory database (Ethan attempted this but it doesn't currently work)
-                        EmployeeJobHistory test = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
-                        TempArrays.addToJobHistory(test);
+                        EmployeeJobHistory addedJobHist = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
+                        addedJobHist.setCriticalSkills(critSkillsArea.getText());
+                        addedJobHist.setSoftSkills(softSkillsArea.getText());
+                        addedJobHist.setTalents(talentsArea.getText());
+                        TempArrays.addToJobHistory(addedJobHist);
                         addHistoryFrame.dispose();
                     }
                 });

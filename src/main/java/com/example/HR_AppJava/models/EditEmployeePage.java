@@ -1,5 +1,6 @@
 /*
  * This is the page that pops up when you click "Edit" from the Home page.
+ * TODO: Refresh to show added JobHistory/EmployeeEvaluation objects
  */
 
 package com.example.HR_AppJava.models;
@@ -96,6 +97,13 @@ public class EditEmployeePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TempArrays.setDemographic(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
+                EmployeeJobHistory editedJobHist = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
+                editedJobHist.setCriticalSkills(critSkillsArea.getText());
+                editedJobHist.setSoftSkills(softSkillsArea.getText());
+                editedJobHist.setTalents(talentsArea.getText());
+                TempArrays.setJobHistory(memberID, editedJobHist);
+                EmployeeEvaluation test = new EmployeeEvaluation(evaluatingSupervisorTextField.getText(), new Date(dateOfEvalSpinner.getValue().hashCode()), mentalStateTextField.getText(), notesArea.getText(), memberID);
+                TempArrays.setEmployeeEvaluation(memberID, test);
                 dispose();
             }
         });
@@ -130,9 +138,11 @@ public class EditEmployeePage extends JFrame {
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // TODO: Save info from text fields to EmployeeJobHistory database (Ethan attempted this but it doesn't currently work)
-                        EmployeeJobHistory test = new EmployeeJobHistory(companyNameTextField2.getText(), supervisorTextField2.getText(), lengthSpinner2.getValue().hashCode(), jobTitleTextField2.getText(), roleOnTeamTextField2.getText(), memberID);
-                        TempArrays.addJobHistoryAt(memberID, test);
+                        EmployeeJobHistory addedJobHist = new EmployeeJobHistory(companyNameTextField2.getText(), supervisorTextField2.getText(), lengthSpinner2.getValue().hashCode(), jobTitleTextField2.getText(), roleOnTeamTextField2.getText(), memberID);
+                        addedJobHist.setCriticalSkills(critSkillsArea.getText());
+                        addedJobHist.setSoftSkills(softSkillsArea.getText());
+                        addedJobHist.setTalents(talentsArea.getText());
+                        TempArrays.addJobHistoryAt(memberID, addedJobHist);
                         addHistoryFrame.dispose();
                     }
                 });
@@ -202,7 +212,8 @@ public class EditEmployeePage extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // TODO: Save info from text fields to EmployeeEvaluation database
-
+                        EmployeeEvaluation test = new EmployeeEvaluation(evaluatingSupervisorTextField2.getText(), new Date(dateOfEvalSpinner2.getValue().hashCode()), mentalStateTextField2.getText(), notesArea2.getText(), memberID);
+                        TempArrays.addToEmployeeEvaluationAt(memberID, test);
                         evaluationFrame.dispose();
                     }
                 });
