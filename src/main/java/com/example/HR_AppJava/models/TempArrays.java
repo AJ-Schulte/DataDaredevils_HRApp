@@ -145,7 +145,7 @@ public class TempArrays {
     }
 
     public static void setEmployeeEvaluation(int index, EmployeeEvaluation hires) {
-        employeeEvaluation.add(index, hires);
+        employeeEvaluation.set(index, hires);
     }
 
     public static void removeFromEmployeeEvaluation(EmployeeEvaluation fired) {
