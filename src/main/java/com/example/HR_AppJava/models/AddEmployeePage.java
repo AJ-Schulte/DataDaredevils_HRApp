@@ -115,12 +115,11 @@ public class AddEmployeePage extends JFrame {
                 addHistoryButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // TODO: Save info from text fields to EmployeeJobHistory database (Ethan attempted this but it doesn't currently work)
-                        EmployeeJobHistory test = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
-                        test.setCriticalSkills(critSkillsArea.getText());
-                        test.setSoftSkills(softSkillsArea.getText());
-                        test.setTalents(talentsArea.getText());
-                        TempArrays.addToJobHistory(test);
+                        EmployeeJobHistory addedJobHist = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
+                        addedJobHist.setCriticalSkills(critSkillsArea.getText());
+                        addedJobHist.setSoftSkills(softSkillsArea.getText());
+                        addedJobHist.setTalents(talentsArea.getText());
+                        TempArrays.addToJobHistory(addedJobHist);
                         addHistoryFrame.dispose();
                     }
                 });
