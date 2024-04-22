@@ -111,6 +111,10 @@ public class TempArrays {
         jobHistory.add(index, job);
     }
 
+    public static void setJobHistory(int index, EmployeeJobHistory job) {
+        jobHistory.set(index, job);
+    }
+
     public static void removeFromJobHistory(EmployeeJobHistory job) {
         jobHistory.remove(job);
     }
@@ -136,7 +140,10 @@ public class TempArrays {
     }
 
     public static void addToEmployeeEvaluationAt(int index, EmployeeEvaluation hires) {
+        employeeEvaluation.add(index, hires);
+    }
 
+    public static void setEmployeeEvaluation(int index, EmployeeEvaluation hires) {
         employeeEvaluation.add(index, hires);
     }
 

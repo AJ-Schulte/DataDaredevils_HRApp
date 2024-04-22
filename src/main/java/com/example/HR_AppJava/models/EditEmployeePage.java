@@ -96,6 +96,10 @@ public class EditEmployeePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 TempArrays.setDemographic(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
+                EmployeeJobHistory test = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
+                TempArrays.setJobHistory(memberID, test);
+                EmployeeEvaluation test2 = new EmployeeEvaluation(evaluatingSupervisorTextField.getText(), new Date(dateOfEvalSpinner.getValue().hashCode()), mentalStateTextField.getText(), notesArea.getText(), memberID);
+                TempArrays.setEmployeeEvaluation(memberID, test2);
                 dispose();
             }
         });
@@ -202,7 +206,8 @@ public class EditEmployeePage extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // TODO: Save info from text fields to EmployeeEvaluation database
-
+                        EmployeeEvaluation test = new EmployeeEvaluation(evaluatingSupervisorTextField2.getText(), new Date(dateOfEvalSpinner2.getValue().hashCode()), mentalStateTextField2.getText(), notesArea2.getText(), memberID);
+                        TempArrays.addToEmployeeEvaluationAt(memberID, test);
                         evaluationFrame.dispose();
                     }
                 });
