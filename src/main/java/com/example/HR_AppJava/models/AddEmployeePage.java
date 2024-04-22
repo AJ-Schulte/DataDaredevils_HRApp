@@ -174,8 +174,8 @@ public class AddEmployeePage extends JFrame {
                 evaluationButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        // TODO: Save info from text fields to EmployeeEvaluation database
-
+                        EmployeeEvaluation test = new EmployeeEvaluation(evaluatingSupervisorTextField.getText(), new Date(dateOfEvalSpinner.getValue().hashCode()), mentalStateTextField.getText(), notesArea.getText(), memberID);
+                        TempArrays.addToEmployeeEvaluationAt(memberID, test);
                         evaluationFrame.dispose();
                     }
                 });
