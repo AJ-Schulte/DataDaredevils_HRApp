@@ -13,7 +13,6 @@ public class EmployeeDemographics {
     private String email;
     private int memberID;
     private String currentTeam;
-    private static int memberIDPosition = 0;
 
     // Constructors
     public EmployeeDemographics(String name, String address, String phoneNumber, String email, String currentTeam) {
@@ -21,8 +20,17 @@ public class EmployeeDemographics {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        memberID = memberIDPosition; // autoassigns an ID; since memberIDPosition is static, new instanciations won't override it
-        memberIDPosition++;
+        memberID = IDGen.getID();
+        this.currentTeam = currentTeam;
+        save(); // The autosave is convienent but I can see how it might cause problems. Remove it if needed.
+    }
+
+    public EmployeeDemographics(int memberID, String name, String address, String phoneNumber, String email, String currentTeam) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.memberID = memberID;
         this.currentTeam = currentTeam;
         save(); // The autosave is convienent but I can see how it might cause problems. Remove it if needed.
     }

@@ -60,6 +60,7 @@ public class TempArrays {
     }
 
     public static void removeDemographic(EmployeeDemographics e) {
+        IDGen.markFreeIndex(e.getMemberID());
         employeeDemographicsArray.remove(e);
     }
 
