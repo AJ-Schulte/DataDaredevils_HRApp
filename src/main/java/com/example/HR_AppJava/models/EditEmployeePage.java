@@ -104,12 +104,11 @@ public class EditEmployeePage extends JFrame {
                 editedJobHist.setTalents(talentsArea.getText());
                 TempArrays.setJobHistory(memberID, editedJobHist);
 
-                /*//This does not appear to work and I have no idea why. 
                 Date testdate = new Date(dateOfEvalSpinner.getValue().hashCode()); //testing
                 System.out.println(testdate); //testing
                 EmployeeEvaluation test = new EmployeeEvaluation(evaluatingSupervisorTextField.getText(), testdate, mentalStateTextField.getText(), notesArea.getText(), memberID);
                 TempArrays.setEmployeeEvaluation(memberID, test);
-                dispose(); */
+                dispose();
             }
         });
 
