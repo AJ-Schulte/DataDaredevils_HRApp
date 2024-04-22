@@ -1,6 +1,6 @@
 /*
  * This is the page you land on after login.
- * TODO: It would be convenient if it updated the display after an add or edit without switching to UserPage and back.
+ * TODO: Refresh to show changes.
  */
 
 package com.example.HR_AppJava.models;
@@ -66,11 +66,9 @@ public class HomePage extends JFrame {
         addData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EmployeeDemographics newEmployee = new EmployeeDemographics(null, null, null, null, null);
-                new AddEmployeePage(newEmployee);
-                //The empty fields are fixed in AddEmployeePage.
+                new AddEmployeePage();
             }
-        }); //Note: be careful changing this method, it comes close to adding ghost info to the database.
+        });
 
         editData.addActionListener (new ActionListener() {
             @Override
