@@ -1,5 +1,6 @@
 /*
  * This is the page that pops up when you click "Edit" from the Home page.
+ * TODO: Refresh to show added JobHistory/EmployeeEvaluation objects
  */
 
 package com.example.HR_AppJava.models;
@@ -97,6 +98,9 @@ public class EditEmployeePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 TempArrays.setDemographic(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
                 EmployeeJobHistory editedJobHist = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
+                editedJobHist.setCriticalSkills(critSkillsArea.getText());
+                editedJobHist.setSoftSkills(softSkillsArea.getText());
+                editedJobHist.setTalents(talentsArea.getText());
                 TempArrays.setJobHistory(memberID, editedJobHist);
                 EmployeeEvaluation test = new EmployeeEvaluation(evaluatingSupervisorTextField.getText(), new Date(dateOfEvalSpinner.getValue().hashCode()), mentalStateTextField.getText(), notesArea.getText(), memberID);
                 TempArrays.setEmployeeEvaluation(memberID, test);

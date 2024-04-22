@@ -2,6 +2,7 @@
  * This is the page that pops up when you click "Add" from the Home page.
  * It has a sort of dependency - since EmployeeDemographics employee was created on HomePage, employee must be filled out, or else there will be an empty index.
  * TODO: Cancelability? (Without leaving an empty index)
+ * TODO: Refresh to show added JobHistory/EmployeeEvaluation objects?
  */
 
 package com.example.HR_AppJava.models;
