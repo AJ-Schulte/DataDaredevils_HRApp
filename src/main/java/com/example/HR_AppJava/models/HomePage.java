@@ -14,7 +14,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class HomePage extends JFrame {
-    private JButton homeButton, userButton, addData, editData, searchButton;
+    private JButton homeButton, userButton, addData, editData, searchButton, refreshButton, removeButton;
     private JTable table;
     private JTextField searchBox;
 
@@ -29,6 +29,8 @@ public class HomePage extends JFrame {
         addData = new JButton("Add");
         editData = new JButton("Edit");
         searchButton = new JButton("Search");
+        refreshButton = new JButton("Refresh");
+        removeButton = new JButton("Remove");
 
         searchBox = new JTextField("Enter Name of Employee Here");
 
@@ -70,7 +72,7 @@ public class HomePage extends JFrame {
             }
         });
 
-        editData.addActionListener (new ActionListener() {
+        editData.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (table.getSelectedRow() != -1) {
@@ -80,12 +82,37 @@ public class HomePage extends JFrame {
                     try {
                         new EditEmployeePage(TempArrays.searchDemographic(value));
                     } catch (Exception e1) {
-                        // TODO: Auto-generated this catch block. This needs to handle the case where searchDemographic() can't find a matching object.
+                        // TODO: Auto-generated this catch block. This needs to handle the case where
+                        // searchDemographic() can't find a matching object.
                         e1.printStackTrace();
                     }
                 } else {
                     unselected();
                 }
+            }
+        });
+
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: Remove selected employee from database
+                int memberID = Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
+                try {
+                    TempArrays.removeAllEvaluations(memberID);
+                    TempArrays.removeAllJobHistories(memberID);
+                    TempArrays.removeDemographic(TempArrays.searchDemographic(memberID));
+                    refresh();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        refreshButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: Refresh Home Page
+                refresh();
             }
         });
 
@@ -105,7 +132,8 @@ public class HomePage extends JFrame {
                     try {
                         new EditEmployeePage(TempArrays.searchDemographic(i));
                     } catch (Exception e1) {
-                        // TODO: Auto-generated this catch block. This needs to handle the case where searchDemographic() can't find a matching object.
+                        // TODO: Auto-generated this catch block. This needs to handle the case where
+                        // searchDemographic() can't find a matching object.
                         e1.printStackTrace();
                     }
                     searchBox.setText("Enter Name of Employee Here");
@@ -149,12 +177,14 @@ public class HomePage extends JFrame {
         tablePanel.setPreferredSize(new Dimension(800, 200));
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(2, 2));
-        buttonPanel.setPreferredSize(new Dimension(200, 100));
+        buttonPanel.setLayout(new GridLayout(2, 3));
+        buttonPanel.setPreferredSize(new Dimension(300, 50));
         buttonPanel.add(addData);
         buttonPanel.add(editData);
+        buttonPanel.add(removeButton);
         buttonPanel.add(searchBox);
         buttonPanel.add(searchButton);
+        buttonPanel.add(refreshButton);
 
         tablePanel.add(buttonPanel);
         tablePanel.add(tablePane);
@@ -174,5 +204,10 @@ public class HomePage extends JFrame {
 
     private void unselected() {
         JOptionPane.showMessageDialog(this, "No Employee Selected. Try Again");
+    }
+
+    private void refresh() {
+        new HomePage();
+        dispose();
     }
 }
