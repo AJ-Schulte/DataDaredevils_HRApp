@@ -59,6 +59,10 @@ public class TempArrays {
         employeeDemographicsArray.add(e);
     }
 
+    public static void addDemographic(int i, EmployeeDemographics e) {
+        employeeDemographicsArray.add(i,e);
+    }
+
     public static void removeDemographic(EmployeeDemographics e) {
         IDGen.markFreeIndex(e.getMemberID());
         employeeDemographicsArray.remove(e);
@@ -77,7 +81,6 @@ public class TempArrays {
         employeeDemographicsArray.get(i).setName(name);
         employeeDemographicsArray.get(i).setAddress(address);
         employeeDemographicsArray.get(i).setPhoneNumber(phoneNumber);
-        ;
         employeeDemographicsArray.get(i).setEmail(email);
         employeeDemographicsArray.get(i).setCurrentTeam(currentTeam);
     }

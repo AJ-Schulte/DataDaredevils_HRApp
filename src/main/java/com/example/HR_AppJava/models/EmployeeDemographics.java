@@ -87,7 +87,7 @@ public class EmployeeDemographics {
 
     // Database Interactions
     public void save() { // write to database
-        TempArrays.addDemographic(this);
+        TempArrays.addDemographic(this.memberID, this);
     }
 
     public void delete() { // remove from database

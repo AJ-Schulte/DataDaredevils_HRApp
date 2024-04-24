@@ -64,12 +64,6 @@ public class UserPage extends JFrame {
                     emailText.setEditable(true);
                     companyText.setEditable(true);
                     isSupervisorCheck.setEnabled(true);
-                    currentUser.setUsername(userNameText.getText());
-                    currentUser.setPassword(passwordText.getText());
-                    currentUser.setEmail(emailText.getText());
-                    currentUser.setCompany(companyText.getText());
-                    currentUser.setIsSupervisor(isSupervisorCheck.isSelected());
-                    TempArrays.setUser(LoginPage.getCurrentUser(), currentUser);
                 } else {
                     editSaveButton.setText("Edit");
                     userNameText.setEditable(false);
@@ -77,6 +71,12 @@ public class UserPage extends JFrame {
                     emailText.setEditable(false);
                     companyText.setEditable(false);
                     isSupervisorCheck.setEnabled(false);
+                    currentUser.setUsername(userNameText.getText());
+                    currentUser.setPassword(passwordText.getText());
+                    currentUser.setEmail(emailText.getText());
+                    currentUser.setCompany(companyText.getText());
+                    currentUser.setIsSupervisor(isSupervisorCheck.isSelected());
+                    TempArrays.setUser(LoginPage.getCurrentUser(), currentUser);
                 }
                 isClicked = !isClicked;
             }
