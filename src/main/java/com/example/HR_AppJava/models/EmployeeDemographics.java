@@ -22,7 +22,7 @@ public class EmployeeDemographics {
         this.email = email;
         memberID = IDGen.getID();
         this.currentTeam = currentTeam;
-        save(); // The autosave is convienent but I can see how it might cause problems. Remove it if needed.
+        save();
     }
 
     public EmployeeDemographics(int memberID, String name, String address, String phoneNumber, String email, String currentTeam) {

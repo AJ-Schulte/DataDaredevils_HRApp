@@ -4,7 +4,6 @@
 */
 package com.example.HR_AppJava.models;
 import java.util.Stack;
-//import java.util.EmptyStackException;
 public class IDGen {
     private static int memberIDBoundary = 0;
     private static Stack<Integer> nextID = new Stack<>();

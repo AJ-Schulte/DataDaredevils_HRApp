@@ -1,6 +1,5 @@
 /*
  * This is the page that pops up when you click "Edit" from the Home page.
- * TODO: Refresh to show added JobHistory/EmployeeEvaluation objects
  */
 
 package com.example.HR_AppJava.models;
@@ -116,8 +115,6 @@ public class EditEmployeePage extends JFrame {
         addHistoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Create a Pop-up window that allows user to enter info for job history that
-                // needs to be added to database then dispose pop-up
                 JFrame addHistoryFrame = new JFrame();
                 addHistoryFrame.setTitle("HR App");
                 addHistoryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -187,8 +184,6 @@ public class EditEmployeePage extends JFrame {
         addEvaluationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Create a pop-up window that allows user to enter info for evaluation which
-                // needs to be added to database then dispose pop-up
                 JFrame evaluationFrame = new JFrame();
                 evaluationFrame.setTitle("HR App");
                 evaluationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

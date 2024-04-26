@@ -1,7 +1,5 @@
 /*
  * This is the page that pops up when you click "Add" from the Home page.
- * It has a sort of dependency - since EmployeeDemographics employee was created on HomePage, employee must be filled out, or else there will be an empty index.
- * TODO: Refresh to show added JobHistory/EmployeeEvaluation objects?
  */
 
 package com.example.HR_AppJava.models;
@@ -107,9 +105,6 @@ public class AddEmployeePage extends JFrame {
         addHistoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Create a Pop-up window that allows user to enter info for job history that
-                // needs to be added to database then dispose pop-up
-
                 // Creates a new Frame to be the base of the pop-up window
                 JFrame addHistoryFrame = new JFrame();
                 addHistoryFrame.setTitle("HR App");
@@ -166,9 +161,6 @@ public class AddEmployeePage extends JFrame {
         addEvaluationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Create a pop-up window that allows user to enter info for evaluation which
-                // needs to be added to database then dispose pop-up
-
                 JFrame evaluationFrame = new JFrame();
                 evaluationFrame.setTitle("HR App");
                 evaluationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

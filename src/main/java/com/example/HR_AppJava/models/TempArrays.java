@@ -90,8 +90,7 @@ public class TempArrays {
     }
 
     public static EmployeeDemographics searchDemographic(int memberID) throws Exception {
-        EmployeeDemographics output = null; // output is initialized to null to prevent polluting the database with a
-                                            // dummy object
+        EmployeeDemographics output = null; // output is initialized to null to prevent polluting the database with adummy object
 
         for (int i = 0; i < employeeDemographicsArray.size(); i++) {
             if (employeeDemographicsArray.get(i).getMemberID() == memberID) {
@@ -101,14 +100,11 @@ public class TempArrays {
         }
 
         if (output != null) {
-            return output; // if output was changed, it's pointing to the matching true object and we can
-                           // return it normally
+            return output; // if output was changed, it's pointing to the matching true object and we can return it normally
         } else {
-            throw new Exception("Employee could not be found."); // otherwise we don't have an object to return and it
-                                                                 // throws an exception instead
+            throw new Exception("Employee could not be found."); // otherwise we don't have an object to return and it throws an exception instead
         }
-    } // This architecture should work for any field of EmployeeDemographics, but it
-      // can't detect duplicates.
+    } // This architecture should work for any field of EmployeeDemographics, but it can't detect duplicates.
 
     // EmployeeJobHistory (AJ)
     private static ArrayList<EmployeeJobHistory> jobHistory = new ArrayList<>();

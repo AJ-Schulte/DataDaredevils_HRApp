@@ -94,12 +94,9 @@ public class Testing {
         }
     }
 
-    // Fills an array with objects initialized with 5-character dummy strings and
-    // random integers.
-    // Modes: 1=EmployeeDemographics, 2=EmployeeJobHistory, 3=User,
-    // 4=EmployeeEvaluation
-    // Theoretical max size without duplicates is 26^5=11,881,376 entries. Any more
-    // would need more chars.
+    /* Fills an array with objects initialized with 5-character dummy strings andrandom integers.
+     * Modes: 1=EmployeeDemographics, 2=EmployeeJobHistory, 3=User, 4=EmployeeEvaluation
+     * Theoretical max size without duplicates is 26^5=11,881,376 entries. Any more would need more chars.*/
     public static void arrayGen(int mode) {
         System.out.println("Generating array...");
         long t1 = System.currentTimeMillis();

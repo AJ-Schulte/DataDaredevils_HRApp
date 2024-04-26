@@ -1,6 +1,5 @@
 /*
  * This is the page you land on after login.
- * TODO: Refresh to show changes.
  */
 
 package com.example.HR_AppJava.models;
@@ -23,7 +22,6 @@ public class HomePage extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(1000, 600));
 
-        // ImageIcon homeIcon = new ImageIcon("homeIcon.png");
         homeButton = new JButton("Home");
         userButton = new JButton("User");
         addData = new JButton("Add");
@@ -95,7 +93,6 @@ public class HomePage extends JFrame {
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Remove selected employee from database
                 int memberID = Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString());
                 try {
                     TempArrays.removeAllEvaluations(memberID);
@@ -111,7 +108,6 @@ public class HomePage extends JFrame {
         refreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Refresh Home Page
                 refresh();
             }
         });

@@ -15,7 +15,6 @@ public class UserPage extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(1000, 600));
 
-        // ImageIcon homeIcon = new ImageIcon("homeIcon.png");
         homeButton = new JButton("Home");
         userButton = new JButton("User");
         editSaveButton = new JButton("Edit");
@@ -48,15 +47,13 @@ public class UserPage extends JFrame {
             }
         });
 
-        // Edit / Save button which should change the users information
+        // Edit/Save button which changes the users information
         editSaveButton.addActionListener(new ActionListener() {
             boolean isClicked = false;
             User currentUser = TempArrays.getUser(LoginPage.getCurrentUser());
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Need to make data entered save to database and update as user moves through
-                // pages
                 if (!isClicked) {
                     editSaveButton.setText("Save");
                     userNameText.setEditable(true);
