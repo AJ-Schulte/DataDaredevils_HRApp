@@ -26,8 +26,7 @@ public class AddEmployeePage extends JFrame {
     private JSpinner lengthSpinner, dateOfEvalSpinner;
 
     public AddEmployeePage() {
-        final int memberID = IDGen.getID();
-        IDGen.manualDecrement();
+        final int memberID = IDGen.getVolatileID();
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(1200, 600));
@@ -92,7 +91,7 @@ public class AddEmployeePage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new EmployeeDemographics(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
-                IDGen.manualIncrement();
+                IDGen.getID();
                 EmployeeDemographics nullCheck = TempArrays.getDemographic(memberID);
                 if(nullCheck.getName().equals("") && nullCheck.getAddress().equals("") && nullCheck.getPhoneNumber().equals("") && nullCheck.getEmail().equals("") && nullCheck.getCurrentTeam().equals("")) {
                     TempArrays.removeDemographic(nullCheck);
