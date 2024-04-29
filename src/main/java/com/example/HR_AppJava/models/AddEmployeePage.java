@@ -90,9 +90,8 @@ public class AddEmployeePage extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new EmployeeDemographics(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
+                EmployeeDemographics nullCheck = new EmployeeDemographics(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
                 IDGen.getID();
-                EmployeeDemographics nullCheck = TempArrays.getDemographic(memberID);
                 if(nullCheck.getName().equals("") && nullCheck.getAddress().equals("") && nullCheck.getPhoneNumber().equals("") && nullCheck.getEmail().equals("") && nullCheck.getCurrentTeam().equals("")) {
                     TempArrays.removeDemographic(nullCheck);
                 }

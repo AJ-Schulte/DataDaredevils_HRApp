@@ -26,7 +26,7 @@ public class EditEmployeePage extends JFrame {
     private JTextArea critSkillsArea, softSkillsArea, talentsArea, notesArea;
     private JSpinner lengthSpinner, dateOfEvalSpinner;
 
-    public EditEmployeePage(EmployeeDemographics employee) throws Exception{
+    public EditEmployeePage(EmployeeDemographics employee) {
         final int memberID = employee.getMemberID();
         setTitle("HR App");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,14 +47,6 @@ public class EditEmployeePage extends JFrame {
         phoneNumLabel = new JLabel("Phone Number: ");
         currentTeamLabel = new JLabel("Current Team: ");
         jobHistoryLabel = new JLabel("Job History: ");
-        companyNameLabel = new JLabel("Company Name: ");
-        supervisorLabel = new JLabel("Former Supervisor: ");
-        lengthLabel = new JLabel("Length on Job (in months): ");
-        jobTitleLabel = new JLabel("Job Title: ");
-        roleOnTeamLabel = new JLabel("Role On Team: ");
-        critSkillsLabel = new JLabel("Critical Skills: ");
-        softSkillsLabel = new JLabel("Soft Skills: ");
-        talentsLabel = new JLabel("Talents: ");
         employeeEvalLabel = new JLabel("Employee Evaluations: ");
         dateOfEvalLabel = new JLabel("Date of Evaluation: ");
         mentalStateLabel = new JLabel("Mental State: ");
@@ -67,20 +59,10 @@ public class EditEmployeePage extends JFrame {
         emailTextField = new JTextField(employee.getEmail());
         phoneNumTextField = new JTextField(employee.getPhoneNumber());
         currentTeamTextField = new JTextField(employee.getCurrentTeam());
-        companyNameTextField = new JTextField();
-        supervisorTextField = new JTextField();
-        jobTitleTextField = new JTextField();
-        roleOnTeamTextField = new JTextField();
-        critSkillsArea = new JTextArea();
-        softSkillsArea = new JTextArea();
-        talentsArea = new JTextArea();
         mentalStateTextField = new JTextField();
         notesArea = new JTextArea();
         evaluatingSupervisorTextField = new JTextField();
 
-        // Spinner Set-Ups
-        SpinnerNumberModel numberModel = new SpinnerNumberModel(0, 0, 10000, 1);
-        lengthSpinner = new JSpinner(numberModel);
         Calendar calendar = Calendar.getInstance();
         Date initDate = calendar.getTime();
         calendar.add(Calendar.YEAR, -100);
@@ -90,6 +72,10 @@ public class EditEmployeePage extends JFrame {
         SpinnerDateModel dateModel = new SpinnerDateModel(initDate, earliestDate, latestDate, Calendar.YEAR);
         dateOfEvalSpinner = new JSpinner(dateModel);
 
+        ArrayList <JTextField> fieldCatcher = new ArrayList<>(4*jobHistories.size());
+        ArrayList <JTextArea> areaCatcher = new ArrayList<>(3*jobHistories.size());
+        ArrayList <Integer> spinnerCatcher = new ArrayList<>(jobHistories.size());
+
         // Buttons that need to do actions
         // Save Button
         saveButton.addActionListener(new ActionListener() {
@@ -97,15 +83,16 @@ public class EditEmployeePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 TempArrays.setDemographic(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
 
-                EmployeeJobHistory editedJobHist = new EmployeeJobHistory(companyNameTextField.getText(), supervisorTextField.getText(), lengthSpinner.getValue().hashCode(), jobTitleTextField.getText(), roleOnTeamTextField.getText(), memberID);
-                editedJobHist.setCriticalSkills(critSkillsArea.getText());
-                editedJobHist.setSoftSkills(softSkillsArea.getText());
-                editedJobHist.setTalents(talentsArea.getText());
-                TempArrays.setJobHistory(memberID, editedJobHist);
+                for(int i=0; i<jobHistories.size()-1; i++) {
+                    EmployeeJobHistory editedJobHist = new EmployeeJobHistory(fieldCatcher.get(((i+1)*i)).getText(), fieldCatcher.get(((i+1)*(i+1))).getText(), spinnerCatcher.get(i), fieldCatcher.get(((i+1)*(i+2))).getText(), fieldCatcher.get(((i+1)*(i+3))).getText(), memberID);
+                    editedJobHist.setCriticalSkills(areaCatcher.get(i*i).getText());
+                    editedJobHist.setSoftSkills(areaCatcher.get(i*(i+1)).getText());
+                    editedJobHist.setTalents(areaCatcher.get(i*(i+2)).getText());
+                    TempArrays.setJobHistory(memberID, editedJobHist);
+                }
 
-                Date testdate = new Date(dateOfEvalSpinner.getValue().hashCode()); //testing
-                System.out.println(testdate); //testing
-                EmployeeEvaluation test = new EmployeeEvaluation(evaluatingSupervisorTextField.getText(), testdate, mentalStateTextField.getText(), notesArea.getText(), memberID);
+                Date date = new Date(dateOfEvalSpinner.getValue().hashCode());
+                EmployeeEvaluation test = new EmployeeEvaluation(evaluatingSupervisorTextField.getText(), date, mentalStateTextField.getText(), notesArea.getText(), memberID);
                 TempArrays.setEmployeeEvaluation(memberID, test);
                 dispose();
             }
@@ -140,11 +127,13 @@ public class EditEmployeePage extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         EmployeeJobHistory addedJobHist = new EmployeeJobHistory(companyNameTextField2.getText(), supervisorTextField2.getText(), lengthSpinner2.getValue().hashCode(), jobTitleTextField2.getText(), roleOnTeamTextField2.getText(), memberID);
-                        addedJobHist.setCriticalSkills(critSkillsArea.getText());
-                        addedJobHist.setSoftSkills(softSkillsArea.getText());
-                        addedJobHist.setTalents(talentsArea.getText());
+                        addedJobHist.setCriticalSkills(critSkillsArea2.getText());
+                        addedJobHist.setSoftSkills(softSkillsArea2.getText());
+                        addedJobHist.setTalents(talentsArea2.getText());
                         TempArrays.addJobHistoryAt(memberID, addedJobHist);
                         addHistoryFrame.dispose();
+                        new EditEmployeePage(employee);
+                        dispose();
                     }
                 });
 
@@ -248,11 +237,44 @@ public class EditEmployeePage extends JFrame {
 
         // Job History Panel
         jobHistoryPanel = new JPanel();
-        jobHistoryPanel.setLayout(new GridLayout(10, 2));
-        jobHistoryPanel.setPreferredSize(new Dimension(1000, 600));
+        int rows=1; //may need changing
         jobHistoryPanel.add(jobHistoryLabel);
         jobHistoryPanel.add(new JLabel());
         for (int i = 0; i < jobHistories.size(); i++) {
+            rows = rows+10;
+            jobHistoryPanel.setLayout(new GridLayout(rows, 2));
+            jobHistoryPanel.setPreferredSize(new Dimension(1000, (i+1)*600));
+            
+            companyNameLabel = new JLabel("Company Name: ");
+            supervisorLabel = new JLabel("Former Supervisor: ");
+            lengthLabel = new JLabel("Length on Job (in months): ");
+            jobTitleLabel = new JLabel("Job Title: ");
+            roleOnTeamLabel = new JLabel("Role On Team: ");
+            critSkillsLabel = new JLabel("Critical Skills: ");
+            softSkillsLabel = new JLabel("Soft Skills: ");
+            talentsLabel = new JLabel("Talents: ");
+
+            SpinnerNumberModel numberModel = new SpinnerNumberModel(0, 0, 10000, 1);
+            lengthSpinner = new JSpinner(numberModel);
+            spinnerCatcher.add(lengthSpinner.getValue().hashCode());
+
+            companyNameTextField = new JTextField();
+            supervisorTextField = new JTextField();
+            jobTitleTextField = new JTextField();
+            roleOnTeamTextField = new JTextField();
+            critSkillsArea = new JTextArea();
+            softSkillsArea = new JTextArea();
+            talentsArea = new JTextArea();
+            fieldCatcher.add(companyNameTextField);
+            fieldCatcher.add(supervisorTextField);
+            fieldCatcher.add(jobTitleTextField);
+            fieldCatcher.add(roleOnTeamTextField);
+            areaCatcher.add(critSkillsArea);
+            areaCatcher.add(softSkillsArea);
+            areaCatcher.add(talentsArea);
+            
+            jobHistoryPanel.add(new JLabel("Job "+(i+1)));
+            jobHistoryPanel.add(new JLabel());
             jobHistoryPanel.add(companyNameLabel);
             companyNameTextField.setText(jobHistories.get(i).getCompanyName());
             jobHistoryPanel.add(companyNameTextField);

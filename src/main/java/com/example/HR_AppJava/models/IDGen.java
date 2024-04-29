@@ -39,7 +39,7 @@ public class IDGen {
         //System.out.println(arraySize);
         //System.out.println(memberIDBoundary);
         arraySize++;
-        if((arraySize != memberIDBoundary)) {
+        if((arraySize < memberIDBoundary) && (nextID.elementAt(nextID.size()-2)<i)) {
             i = i-(memberIDBoundary-arraySize);
             if(i<0) i = 0;
             return i;
