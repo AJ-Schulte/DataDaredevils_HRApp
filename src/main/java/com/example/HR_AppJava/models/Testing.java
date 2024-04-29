@@ -146,6 +146,7 @@ public class Testing {
         long t2 = System.currentTimeMillis();
         System.out.println("Array generation time: " + (t2 - t1) + "ms");
     }
+    /* 
     public static void main(String[] args) throws Exception {
         //EmployeeDemographics tests
         arrayGen(1);
@@ -172,6 +173,5 @@ public class Testing {
          
         // EmployeeEvaluation tests
         //arrayGen(4);
-        System.out.println(TempArrays.getEmployeeEvaluation(0).getEmployeenotes()+"; "+TempArrays.getEmployeeEvaluation(0).getMentalstate()+"; "/*+TempArrays.getEmployeeEvaluation(0).getDateofEval()*/);
-    }
+    } */
 }
