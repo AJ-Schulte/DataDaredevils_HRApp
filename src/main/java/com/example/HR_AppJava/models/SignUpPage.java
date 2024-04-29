@@ -19,7 +19,7 @@ public class SignUpPage extends JFrame {
 
         JLabel usernameLabel = new JLabel("Username: ");
         JLabel passwordLabel = new JLabel("Password: ");
-        JLabel isSupervisorLabel = new JLabel("Are you a Supervisor? ");
+        JLabel isSupervisorLabel = new JLabel("Are you a supervisor? ");
 
         userTXT = new JTextField();
         passwordTXT = new JPasswordField();
@@ -38,9 +38,9 @@ public class SignUpPage extends JFrame {
                 if (TempArrays.searchForUser(username, password) == -1)
                     signUp(username, password, isSupervisor);
                 else if (!username.equals("") && !String.valueOf(password).equals(""))
-                    JOptionPane.showMessageDialog(null, "User already exists");
+                    JOptionPane.showMessageDialog(null, "User already exists.");
                 else
-                    JOptionPane.showMessageDialog(null, "No Username or Password entered.");
+                    JOptionPane.showMessageDialog(null, "No username or password entered.");
             }
         });
 
@@ -61,7 +61,7 @@ public class SignUpPage extends JFrame {
         // creates new user with details provided and automatically moves to login page
         User newUser = new User(username, null, String.valueOf(password), null, supervisor);
         TempArrays.addUser(newUser);
-        JOptionPane.showMessageDialog(this, "Successfully Created a New Account");
+        JOptionPane.showMessageDialog(this, "Successfully created a new account!");
         new LoginPage();
         dispose();
     }

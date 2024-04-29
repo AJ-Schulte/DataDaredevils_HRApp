@@ -35,7 +35,7 @@ public class LoginPage extends JFrame {
                 if (!username.equals("") && !String.valueOf(password).equals(""))
                     login(username, password);
                 else
-                    JOptionPane.showMessageDialog(null, "Username or Password entered incorrectly");
+                    JOptionPane.showMessageDialog(null, "Username or password was entered incorrectly.");
             }
         });
 
@@ -64,12 +64,12 @@ public class LoginPage extends JFrame {
         if (TempArrays.doesUserExist(username, password)) {
             // Successfully logged in move to home page
             currentUserIndex = TempArrays.searchForUser(username, password);
-            JOptionPane.showMessageDialog(this, "Successfully Logged In");
+            JOptionPane.showMessageDialog(this, "Successfully logged in. Welcome!");
             dispose();
             new HomePage();
         } else {
             // Failed to login reset page
-            JOptionPane.showMessageDialog(this, "User Does Not Exist Try Again");
+            JOptionPane.showMessageDialog(this, "This user does not exist, please try again.");
             passwordTXT.setText("");
             usernameTXT.setText("");
         }

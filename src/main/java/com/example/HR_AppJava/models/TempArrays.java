@@ -60,6 +60,7 @@ public class TempArrays {
     }
 
     public static void addDemographic(int i, EmployeeDemographics e) {
+        i = IDGen.verifyIndex(i, employeeDemographicsArray.size());
         employeeDemographicsArray.add(i,e);
     }
 

@@ -30,7 +30,7 @@ public class HomePage extends JFrame {
         refreshButton = new JButton("Refresh");
         removeButton = new JButton("Remove");
 
-        searchBox = new JTextField("Enter Name of Employee Here");
+        searchBox = new JTextField("Enter name of employee here...");
 
         // Creates the table of employees
         String[] columnNames = { "ID", "Name", "E-Mail", "Phone Number", "Current Team" };
@@ -123,7 +123,7 @@ public class HomePage extends JFrame {
                     }
                 }
                 if (i >= TempArrays.getDemographicSize())
-                    JOptionPane.showMessageDialog(null, "Employee Does Not Exist");
+                    JOptionPane.showMessageDialog(null, "This employee does not exist.");
                 else if (TempArrays.getDemographic(i).getName().equals(name)) {
                     try {
                         new EditEmployeePage(TempArrays.searchDemographic(i));
@@ -132,7 +132,7 @@ public class HomePage extends JFrame {
                         // searchDemographic() can't find a matching object.
                         e1.printStackTrace();
                     }
-                    searchBox.setText("Enter Name of Employee Here");
+                    searchBox.setText("Enter name of employee here...");
                 }
             }
         });
@@ -140,14 +140,14 @@ public class HomePage extends JFrame {
         searchBox.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (searchBox.getText().equals("Enter Name of Employee Here"))
+                if (searchBox.getText().equals("Enter name of employee here..."))
                     searchBox.setText("");
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 if (searchBox.getText().isEmpty())
-                    searchBox.setText("Enter Name of Employee Here");
+                    searchBox.setText("Enter name of employee here...");
             }
         });
 
@@ -199,7 +199,7 @@ public class HomePage extends JFrame {
     }
 
     private void unselected() {
-        JOptionPane.showMessageDialog(this, "No Employee Selected. Try Again");
+        JOptionPane.showMessageDialog(this, "No employee selected. Please try again.");
     }
 
     private void refresh() {
