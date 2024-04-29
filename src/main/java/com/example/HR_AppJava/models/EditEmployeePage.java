@@ -74,7 +74,7 @@ public class EditEmployeePage extends JFrame {
 
         ArrayList <JTextField> fieldCatcher = new ArrayList<>(4*jobHistories.size());
         ArrayList <JTextArea> areaCatcher = new ArrayList<>(3*jobHistories.size());
-        ArrayList <Integer> spinnerCatcher = new ArrayList<>(jobHistories.size());
+        ArrayList <JSpinner> spinnerCatcher = new ArrayList<>(jobHistories.size());
 
         // Buttons that need to do actions
         // Save Button
@@ -84,11 +84,16 @@ public class EditEmployeePage extends JFrame {
                 TempArrays.setDemographic(memberID, nameTextField.getText(), addressTextField.getText(), phoneNumTextField.getText(), emailTextField.getText(), currentTeamTextField.getText());
 
                 for(int i=0; i<jobHistories.size()-1; i++) {
-                    EmployeeJobHistory editedJobHist = new EmployeeJobHistory(fieldCatcher.get(((i+1)*i)).getText(), fieldCatcher.get(((i+1)*(i+1))).getText(), spinnerCatcher.get(i), fieldCatcher.get(((i+1)*(i+2))).getText(), fieldCatcher.get(((i+1)*(i+3))).getText(), memberID);
-                    editedJobHist.setCriticalSkills(areaCatcher.get(i*i).getText());
-                    editedJobHist.setSoftSkills(areaCatcher.get(i*(i+1)).getText());
-                    editedJobHist.setTalents(areaCatcher.get(i*(i+2)).getText());
+                    int lengthOnJob = spinnerCatcher.get(i).getValue().hashCode();
+                    EmployeeJobHistory editedJobHist = new EmployeeJobHistory(fieldCatcher.get(i/4).getText(), fieldCatcher.get(i/4+1).getText(), lengthOnJob, fieldCatcher.get(i/4+2).getText(), fieldCatcher.get(i/4+3).getText(), memberID);
+                    editedJobHist.setCriticalSkills(areaCatcher.get(i/3).getText());
+                    editedJobHist.setSoftSkills(areaCatcher.get((i/3)+1).getText());
+                    editedJobHist.setTalents(areaCatcher.get((i/3)+2).getText());
                     TempArrays.setJobHistory(memberID, editedJobHist);
+                }
+                for(int i=0; i<jobHistories.size()-1; i++) {
+                    int lengthOnJob = spinnerCatcher.get(i).getValue().hashCode();
+                    TempArrays.getFromJobHistory(memberID+i).setLengthOnJob(lengthOnJob);
                 }
 
                 Date date = new Date(dateOfEvalSpinner.getValue().hashCode());
@@ -256,7 +261,7 @@ public class EditEmployeePage extends JFrame {
 
             SpinnerNumberModel numberModel = new SpinnerNumberModel(0, 0, 10000, 1);
             lengthSpinner = new JSpinner(numberModel);
-            spinnerCatcher.add(lengthSpinner.getValue().hashCode());
+            spinnerCatcher.add(lengthSpinner);
 
             companyNameTextField = new JTextField();
             supervisorTextField = new JTextField();
