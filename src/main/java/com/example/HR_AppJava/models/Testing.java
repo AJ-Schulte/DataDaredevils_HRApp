@@ -106,7 +106,7 @@ public class Testing {
         char p4 = 'a';
         char p5 = 'a';
         String fullString;
-        for (int i = 1; i < 10000; i++) {
+        for (int i = 1; i < 1000000; i++) {
             fullString = "" + p1 + p2 + p3 + p4 + p5;
             switch (mode) {
                 case 1:

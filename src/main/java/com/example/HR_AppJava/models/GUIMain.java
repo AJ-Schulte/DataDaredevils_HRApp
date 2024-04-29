@@ -24,7 +24,7 @@ public class GUIMain extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                User u1 = new User("asa", null, "123", null, true);
+                User u1 = new User("admin", null, "admin", null, true);
                 TempArrays.addUser(u1);
                 Testing.arrayGen(1);
                 Testing.arrayGen(2);
